@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>سامانه مدیریت فاکتور آبان کلکتور | Aban Collector</title>
+  <title>سامانه مدیریت فاکتور و خط تولید آبان کلکتور | Aban Collector</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -55,7 +55,7 @@
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-sky-500 selection:text-white">
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-sky-400 selection:text-slate-950">
 
   <!-- Toast Notifications Container -->
   <div id="toastContainer" class="fixed top-4 left-4 right-4 sm:left-6 sm:right-auto z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none"></div>
@@ -64,15 +64,15 @@
   <div id="app" class="flex-grow flex flex-col">
 
     <!-- ================================================================= -->
-    <!-- १. صفحه ورود (LOGIN VIEW)                                         -->
+    <!-- ۱. صفحه ورود سه کاربره (LOGIN VIEW)                               -->
     <!-- ================================================================= -->
     <section id="loginView" class="flex-grow flex items-center justify-center p-4 sm:p-6">
-      <div class="w-full max-w-md bg-slate-900 border border-slate-800/90 rounded-3xl shadow-2xl overflow-hidden animate-fade">
+      <div class="w-full max-w-lg bg-slate-800/90 border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden animate-fade">
         
         <!-- Header & Brand Logo -->
-        <div class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 p-6 sm:p-8 text-center border-b border-slate-800/80 relative">
-          <!-- لوگوی اختصاصی آبان کلکتور -->
-          <div class="w-20 h-20 mx-auto rounded-2xl bg-black border border-sky-500/30 p-3 shadow-2xl flex items-center justify-center mb-4">
+        <div class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 p-6 sm:p-8 text-center border-b border-slate-700/80 relative">
+          <!-- لوگوی اختصاصی آبان کلکتور[cite: 1, 3] -->
+          <div class="w-20 h-20 mx-auto rounded-2xl bg-black border border-sky-400/30 p-3 shadow-2xl flex items-center justify-center mb-4">
             <svg viewBox="0 0 200 200" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M100 18 L42 120 H57 L100 44 L143 120 H158 L100 18 Z" fill="#18627c"/>
               <path d="M100 52 L64 120 H78 L100 78 L122 120 H136 L100 52 Z" fill="#18627c"/>
@@ -82,11 +82,11 @@
               <path d="M84 128 C84 137 91 144 100 144 C109 144 116 137 116 128 H84 Z" fill="#18627c"/>
             </svg>
           </div>
-          <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight">سامانه فاکتور آبان کلکتور</h1>
-          <p class="text-xs text-sky-400 mt-1.5 font-medium">پرتال یکپارچه مدیریت و ارسال فاکتور به کارخانه</p>
+          <h1 class="text-xl sm:text-2xl font-black text-white tracking-tight">سامانه فاکتور و تولید آبان کلکتور</h1>
+          <p class="text-xs text-sky-400 mt-1.5 font-medium">مدیریت سفارشات، ارجاع اداری و کنترل ۵ مرحله‌ای خط تولید</p>
           
           <!-- وضعیت اتصال به دیتابیس ابری -->
-          <div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-950 text-[11px] border border-slate-800">
+          <div class="mt-4 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-slate-950 text-[11px] border border-slate-700">
             <span id="loginConnDot" class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
             <span id="loginConnText" class="text-slate-300 font-medium">در حال بررسی ارتباط با سرور...</span>
           </div>
@@ -94,50 +94,64 @@
 
         <!-- انتخاب نقش و فرم رمز عبور -->
         <div class="p-6 sm:p-7">
-          <p class="text-xs font-bold text-slate-400 mb-4 text-center">لطفاً حساب کاربری خود را جهت ورود انتخاب کنید:</p>
+          <p class="text-xs font-bold text-slate-300 mb-4 text-center">لطفاً نقش کاربری خود را جهت ورود انتخاب کنید:</p>
 
-          <!-- کارت‌های انتخاب کاربر -->
-          <div class="grid grid-cols-2 gap-3.5 mb-5">
-            <!-- کارت آقا مجید -->
+          <!-- کارت‌های انتخاب ۳ کاربر -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+            <!-- ۱. کارت آقا مجید -->
             <button type="button" onclick="selectRole('majid')" id="roleCard-majid"
-              class="role-card group text-right p-4 rounded-2xl border-2 border-slate-800 hover:border-sky-400/70 bg-slate-950/60 transition-all duration-200 flex flex-col items-start gap-3 focus:outline-none">
-              <div class="w-11 h-11 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center border border-sky-500/20 group-hover:scale-105 transition-transform">
+              class="role-card group text-right p-3.5 rounded-2xl border-2 border-slate-700 hover:border-sky-400/70 bg-slate-900/70 transition-all duration-200 flex sm:flex-col items-center sm:items-start gap-3 focus:outline-none">
+              <div class="w-11 h-11 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center border border-sky-500/20 group-hover:scale-105 transition-transform shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/>
                 </svg>
               </div>
               <div>
-                <div class="font-extrabold text-white text-sm sm:text-base">آقا مجید</div>
-                <div class="text-[11px] text-slate-400 mt-0.5">مدیر سیستم</div>
+                <div class="font-extrabold text-white text-sm">آقا مجید</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">مدیریت سیستم</div>
               </div>
             </button>
 
-            <!-- کارت خانم احمدی -->
+            <!-- ۲. کارت خانم احمدی -->
             <button type="button" onclick="selectRole('ahmadi')" id="roleCard-ahmadi"
-              class="role-card group text-right p-4 rounded-2xl border-2 border-slate-800 hover:border-emerald-400/70 bg-slate-950/60 transition-all duration-200 flex flex-col items-start gap-3 focus:outline-none">
-              <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20 group-hover:scale-105 transition-transform">
+              class="role-card group text-right p-3.5 rounded-2xl border-2 border-slate-700 hover:border-emerald-400/70 bg-slate-900/70 transition-all duration-200 flex sm:flex-col items-center sm:items-start gap-3 focus:outline-none">
+              <div class="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/20 group-hover:scale-105 transition-transform shrink-0">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
                 </svg>
               </div>
               <div>
-                <div class="font-extrabold text-white text-sm sm:text-base">خانم احمدی</div>
-                <div class="text-[11px] text-slate-400 mt-0.5">امور هماهنگی کارخانه</div>
+                <div class="font-extrabold text-white text-sm">خانم احمدی</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">هماهنگی و امور اداری</div>
+              </div>
+            </button>
+
+            <!-- ۳. کارت خانم کاملی -->
+            <button type="button" onclick="selectRole('kamali')" id="roleCard-kamali"
+              class="role-card group text-right p-3.5 rounded-2xl border-2 border-slate-700 hover:border-amber-400/70 bg-slate-900/70 transition-all duration-200 flex sm:flex-col items-center sm:items-start gap-3 focus:outline-none">
+              <div class="w-11 h-11 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center border border-amber-500/20 group-hover:scale-105 transition-transform shrink-0">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437l1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008z"/>
+                </svg>
+              </div>
+              <div>
+                <div class="font-extrabold text-white text-sm">خانم کاملی</div>
+                <div class="text-[11px] text-slate-400 mt-0.5">کنترل خط تولید کارخانه</div>
               </div>
             </button>
           </div>
 
           <!-- فرم ورود رمز عبور -->
-          <form id="loginForm" onsubmit="handleLogin(event)" class="hidden border-t border-slate-800/90 pt-5 animate-fade">
+          <form id="loginForm" onsubmit="handleLogin(event)" class="hidden border-t border-slate-700/80 pt-5 animate-fade">
             <div class="mb-4">
               <div class="flex items-center justify-between mb-2">
                 <label for="loginPassword" class="block text-xs font-bold text-slate-300">
                   رمز عبور <span id="selectedRoleName" class="text-sky-400 font-extrabold"></span>:
                 </label>
-                <span class="text-[11px] text-slate-500">رمز پیش‌فرض: ۱۲۳۴</span>
+                <span class="text-[11px] text-slate-400">رمز پیش‌فرض: 1234</span>
               </div>
               <input type="password" id="loginPassword" inputmode="numeric" required placeholder="رمز عبور خود را وارد کنید..."
-                class="w-full rounded-xl border border-slate-700 bg-slate-950 px-4 py-3 text-sm text-white focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all text-center tracking-widest font-black" />
+                class="w-full rounded-xl border border-slate-700 bg-slate-900 px-4 py-3 text-sm text-white focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all text-center tracking-widest font-black" />
               
               <p id="loginErrorMsg" class="hidden text-xs text-rose-400 font-bold mt-2.5 flex items-center justify-center gap-1.5 bg-rose-500/10 border border-rose-500/20 py-2 px-3 rounded-xl">
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -149,13 +163,13 @@
 
             <div class="flex items-center justify-between mb-5">
               <label class="inline-flex items-center gap-2 cursor-pointer select-none">
-                <input type="checkbox" id="rememberMeCheck" checked class="w-4 h-4 rounded border-slate-700 bg-slate-950 text-sky-500 focus:ring-0" />
-                <span class="text-xs text-slate-400 font-medium">حساب من را در این مرورگر به خاطر بسپار</span>
+                <input type="checkbox" id="rememberMeCheck" checked class="w-4 h-4 rounded border-slate-700 bg-slate-900 text-sky-400 focus:ring-0" />
+                <span class="text-xs text-slate-300 font-medium">حساب من را در این مرورگر به خاطر بسپار</span>
               </label>
             </div>
 
             <button type="submit" id="loginSubmitBtn"
-              class="w-full py-3.5 px-5 rounded-xl bg-sky-500 hover:bg-sky-400 active:bg-sky-600 text-slate-950 font-black text-sm shadow-lg shadow-sky-500/20 transition-all flex items-center justify-center gap-2">
+              class="w-full py-3.5 px-5 rounded-xl bg-sky-400 hover:bg-sky-300 active:bg-sky-500 text-slate-950 font-black text-sm shadow-lg shadow-sky-400/20 transition-all flex items-center justify-center gap-2">
               <span>ورود به سامانه</span>
               <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
@@ -168,7 +182,7 @@
     </section>
 
     <!-- ================================================================= -->
-    <!-- ۲. نمای پنل کاربری (DASHBOARD VIEW - بدون دکمه سوییچ پنل)         -->
+    <!-- ۲. نمای پنل کاربری (DASHBOARD VIEW)                               -->
     <!-- ================================================================= -->
     <section id="dashboardView" class="hidden flex-grow flex flex-col">
       
@@ -178,6 +192,7 @@
           
           <!-- مشخصات کاربر فعال و لوگو -->
           <div class="flex items-center gap-3">
+            <!-- لوگوی اختصاصی آبان کلکتور[cite: 1, 3] -->
             <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-black p-1.5 border border-slate-700 flex items-center justify-center shrink-0 shadow">
               <svg viewBox="0 0 200 200" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M100 18 L42 120 H57 L100 44 L143 120 H158 L100 18 Z" fill="#18627c"/>
@@ -195,22 +210,22 @@
               </div>
               <div class="flex items-center gap-1.5 mt-1">
                 <span id="headerConnDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span id="headerConnText" class="text-[11px] text-emerald-400 font-medium">آنلاین (بروزرسانی خودکار ۳ ثانیه‌ای)</span>
+                <span id="headerConnText" class="text-[11px] text-emerald-400 font-medium">آنلاین (بروزرسانی خودکار ۲.۵ ثانیه‌ای)</span>
               </div>
             </div>
           </div>
 
-          <!-- دکمه‌های عملیاتی هدر (تغییر رمز، ریست رمز خانم احمدی برای مجید، خروج) -->
+          <!-- دکمه‌های عملیاتی هدر -->
           <div class="flex items-center gap-1.5 sm:gap-2">
             
-            <!-- دکمه بازنشانی رمز خانم احمدی (فقط در پنل آقا مجید نمایش داده می‌شود) -->
-            <button id="btnResetAhmadi" onclick="resetAhmadiPassword()"
+            <!-- دکمه بازنشانی رمز کاربران (فقط در پنل آقا مجید) -->
+            <button id="btnResetPasswords" onclick="resetStaffPasswords()"
               class="hidden text-xs font-bold px-3 py-2 rounded-xl bg-amber-500/10 text-amber-300 border border-amber-500/20 hover:bg-amber-500/20 transition-colors items-center gap-1.5"
-              title="بازنشانی رمز خانم احمدی به 1234">
+              title="بازنشانی رمز خانم احمدی و خانم کاملی به 1234">
               <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"/>
               </svg>
-              <span class="hidden md:inline">ریست رمز خانم احمدی</span>
+              <span class="hidden md:inline">ریست رمز پرسنل</span>
             </button>
 
             <!-- دکمه تغییر رمز عبور -->
@@ -239,41 +254,37 @@
       <main class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex-grow">
         
         <!-- کارت‌های آمار وضعیت در بالای صفحه -->
-        <div class="grid grid-cols-3 gap-3 sm:gap-5 mb-6 sm:mb-8">
-          <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl flex items-center justify-between shadow-sm">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div class="bg-slate-800 border border-slate-700/80 p-4 rounded-2xl flex items-center justify-between shadow-sm">
             <div>
               <p class="text-[11px] sm:text-xs text-slate-400 font-medium">کل فاکتورها</p>
               <p id="statTotal" class="text-xl sm:text-2xl font-black text-white mt-1">0</p>
             </div>
-            <div class="w-10 h-10 rounded-xl bg-slate-800 text-sky-400 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
-              </svg>
-            </div>
+            <div class="w-10 h-10 rounded-xl bg-slate-900 text-sky-400 flex items-center justify-center shrink-0">📋</div>
           </div>
 
-          <div class="bg-slate-900 border border-amber-500/30 p-4 rounded-2xl flex items-center justify-between shadow-sm">
+          <div class="bg-slate-800 border border-amber-500/30 p-4 rounded-2xl flex items-center justify-between shadow-sm">
             <div>
-              <p class="text-[11px] sm:text-xs text-amber-400 font-medium">در انتظار ارسال</p>
+              <p class="text-[11px] sm:text-xs text-amber-400 font-medium">در انتظار ارجاع</p>
               <p id="statPending" class="text-xl sm:text-2xl font-black text-amber-400 mt-1">0</p>
             </div>
-            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-            </div>
+            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0">🟡</div>
           </div>
 
-          <div class="bg-slate-900 border border-emerald-500/30 p-4 rounded-2xl flex items-center justify-between shadow-sm">
+          <div class="bg-slate-800 border border-sky-500/30 p-4 rounded-2xl flex items-center justify-between shadow-sm">
             <div>
-              <p class="text-[11px] sm:text-xs text-emerald-400 font-medium">ارسال‌شده به کارخانه</p>
-              <p id="statSent" class="text-xl sm:text-2xl font-black text-emerald-400 mt-1">0</p>
+              <p class="text-[11px] sm:text-xs text-sky-400 font-medium">در خط تولید کارخانه</p>
+              <p id="statInFactory" class="text-xl sm:text-2xl font-black text-sky-400 mt-1">0</p>
             </div>
-            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
+            <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center shrink-0">⚙️</div>
+          </div>
+
+          <div class="bg-slate-800 border border-emerald-500/30 p-4 rounded-2xl flex items-center justify-between shadow-sm">
+            <div>
+              <p class="text-[11px] sm:text-xs text-emerald-400 font-medium">تکمیل و ارسال نهایی</p>
+              <p id="statCompleted" class="text-xl sm:text-2xl font-black text-emerald-400 mt-1">0</p>
             </div>
+            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0">🟢</div>
           </div>
         </div>
 
@@ -284,47 +295,47 @@
           <!-- ستون فرم ثبت فاکتور جدید (فقط مخصوص آقا مجید)             -->
           <!-- ========================================================= -->
           <div id="majidFormColumn" class="hidden lg:col-span-5">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 sticky top-24 shadow-xl">
-              <div class="flex items-center gap-3 pb-4 mb-5 border-b border-slate-800">
-                <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/20 flex items-center justify-center shrink-0">
+            <div class="bg-slate-800 border border-slate-700/90 rounded-3xl p-5 sm:p-6 sticky top-24 shadow-xl">
+              <div class="flex items-center gap-3 pb-4 mb-5 border-b border-slate-700/80">
+                <div class="w-10 h-10 rounded-xl bg-sky-400/10 text-sky-400 border border-sky-400/20 flex items-center justify-center shrink-0">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
                   </svg>
                 </div>
                 <div>
                   <h3 class="font-extrabold text-white text-base">ثبت و ارسال فاکتور جدید</h3>
-                  <p class="text-xs text-slate-400 mt-0.5">فشرده‌سازی خودکار و ارسال آنی به پنل خانم احمدی</p>
+                  <p class="text-xs text-slate-400 mt-0.5">فشرده‌سازی خودکار و ارسال به خانم احمدی</p>
                 </div>
               </div>
 
               <form id="createInvoiceForm" onsubmit="handleCreateInvoice(event)" class="space-y-4">
-                <!-- عنوان یا شماره فاکتور / نام مشتری -->
+                <!-- شماره یا عنوان فاکتور / سفارش -->
                 <div>
-                  <label for="invTitle" class="block text-xs font-bold text-slate-300 mb-1.5">
-                    عنوان یا شماره فاکتور / نام مشتری <span class="text-rose-400">*</span>
+                  <label for="invTitle" class="block text-xs font-bold text-slate-200 mb-1.5">
+                    شماره یا عنوان فاکتور / سفارش <span class="text-rose-400">*</span>
                   </label>
-                  <input type="text" id="invTitle" required placeholder="مثال: فاکتور ۱۱۸ - آقای محمدی (کلکتور ۵ راهی)"
-                    class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-3 text-xs sm:text-sm text-white focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all" />
+                  <input type="text" id="invTitle" required placeholder="مثال: فاکتور ۱۲۵ - کلکتور ۴ راهی رضایی"
+                    class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3.5 py-3 text-xs sm:text-sm text-white focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all" />
                 </div>
 
-                <!-- بارگذاری تصویر فاکتور همراه با فشرده‌سازی Canvas -->
+                <!-- بارگذاری تصویر فاکتور همراه با فشرده‌سازی Canvas (حداکثر عرض 900px و کیفیت JPEG 0.65) -->
                 <div>
-                  <label class="block text-xs font-bold text-slate-300 mb-1.5">
+                  <label class="block text-xs font-bold text-slate-200 mb-1.5">
                     تصویر فاکتور <span class="text-rose-400">*</span>
                   </label>
                   <label for="invFile"
-                    class="flex flex-col items-center justify-center w-full min-h-[150px] border-2 border-dashed border-slate-700 hover:border-sky-400 rounded-2xl cursor-pointer bg-slate-950/70 hover:bg-slate-950 transition-all p-4 text-center">
+                    class="flex flex-col items-center justify-center w-full min-h-[150px] border-2 border-dashed border-slate-600 hover:border-sky-400 rounded-2xl cursor-pointer bg-slate-900/70 hover:bg-slate-900 transition-all p-4 text-center">
                     
                     <!-- حالت قبل از انتخاب عکس -->
                     <div id="uploadPrompt" class="flex flex-col items-center">
-                      <div class="w-12 h-12 rounded-2xl bg-sky-500/10 text-sky-400 flex items-center justify-center mb-2">
+                      <div class="w-12 h-12 rounded-2xl bg-sky-400/10 text-sky-400 flex items-center justify-center mb-2">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z"/>
                           <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/>
                         </svg>
                       </div>
                       <span class="text-xs font-bold text-slate-200">برای انتخاب عکس از گالری یا دوربین لمس کنید</span>
-                      <span class="text-[11px] text-slate-500 mt-1">فشرده‌سازی خودکار استاندارد (عرض حداکثر 900px • کیفیت JPEG 0.7)</span>
+                      <span class="text-[11px] text-slate-400 mt-1">فشرده‌سازی خودکار (حداکثر عرض 900px • کیفیت JPEG 0.65)</span>
                     </div>
 
                     <!-- حالت پیش‌نمایش بعد از انتخاب و فشرده‌سازی عکس -->
@@ -340,42 +351,42 @@
 
                 <!-- توضیحات اختیاری مجید -->
                 <div>
-                  <label for="invNote" class="block text-xs font-bold text-slate-300 mb-1.5">
-                    یادداشت یا توضیحات تکمیلی برای خانم احمدی (اختیاری)
+                  <label for="invNote" class="block text-xs font-bold text-slate-200 mb-1.5">
+                    یادداشت یا توضیحات سفارش (اختیاری)
                   </label>
-                  <textarea id="invNote" rows="2" placeholder="توضیحات ارسال، اولویت بارگیری، نحوه بسته‌بندی و..."
-                    class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all resize-none"></textarea>
+                  <textarea id="invNote" rows="2" placeholder="توضیحات تکمیلی برای امور اداری یا خط تولید کارخانه..."
+                    class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all resize-none"></textarea>
                 </div>
 
                 <!-- دکمه ثبت نهایی -->
                 <button type="submit" id="submitInvoiceBtn"
-                  class="w-full py-3.5 px-4 rounded-xl bg-sky-500 hover:bg-sky-400 active:bg-sky-600 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-sky-500/20 transition-all flex items-center justify-center gap-2">
+                  class="w-full py-3.5 px-4 rounded-xl bg-sky-400 hover:bg-sky-300 active:bg-sky-500 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-sky-400/20 transition-all flex items-center justify-center gap-2">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
                   </svg>
-                  <span>ثبت و ارسال به خانم احمدی</span>
+                  <span>ثبت و ارسال فاکتور به خانم احمدی</span>
                 </button>
               </form>
             </div>
           </div>
 
           <!-- ========================================================= -->
-          <!-- ستون لیست فاکتورها (مشترک با ظاهر متناسب برای هر نقش)     -->
+          <!-- ستون لیست فاکتورها (متناسب با هر ۳ نقش کاربری)             -->
           <!-- ========================================================= -->
           <div id="invoiceListColumn" class="lg:col-span-7">
-            <div class="bg-slate-900 border border-slate-800 rounded-3xl p-4 sm:p-6 shadow-xl">
+            <div class="bg-slate-800 border border-slate-700/90 rounded-3xl p-4 sm:p-6 shadow-xl">
               
               <!-- سرتیتر و فیلترهای وضعیت -->
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 pb-4 mb-4 border-b border-slate-800">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 pb-4 mb-4 border-b border-slate-700/80">
                 <div>
                   <h3 id="listTitle" class="font-extrabold text-white text-base sm:text-lg">لیست فاکتورها</h3>
                   <p id="listSubtitle" class="text-xs text-slate-400 mt-0.5">همگام‌سازی زنده با دیتابیس فایربیس</p>
                 </div>
 
                 <!-- تب‌های فیلتر -->
-                <div class="inline-flex p-1 rounded-xl bg-slate-950 border border-slate-800 text-xs self-start sm:self-auto">
+                <div class="inline-flex p-1 rounded-xl bg-slate-900 border border-slate-700 text-xs self-start sm:self-auto">
                   <button type="button" onclick="setFilter('all')" id="filter-all"
-                    class="px-3 py-1.5 rounded-lg font-bold bg-slate-800 text-white transition-all">
+                    class="px-3 py-1.5 rounded-lg font-bold bg-slate-800 text-white shadow transition-all">
                     همه
                   </button>
                   <button type="button" onclick="setFilter('pending')" id="filter-pending"
@@ -384,23 +395,23 @@
                   </button>
                   <button type="button" onclick="setFilter('sent')" id="filter-sent"
                     class="px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all">
-                    🟢 ارسال‌شده
+                    🟢 ارجاع به کارخانه
                   </button>
                 </div>
               </div>
 
               <!-- نوار جستجو -->
               <div class="relative mb-5">
-                <input type="text" id="searchInput" oninput="renderInvoices()" placeholder="جستجو در شماره فاکتور، نام مشتری یا توضیحات..."
-                  class="w-full rounded-xl border border-slate-800 bg-slate-950/90 pr-10 pl-4 py-2.5 text-xs sm:text-sm text-white focus:border-sky-400 outline-none transition-all" />
-                <svg class="w-4 h-4 text-slate-500 absolute right-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <input type="text" id="searchInput" oninput="renderInvoices()" placeholder="جستجو در شماره فاکتور، نام سفارش یا توضیحات..."
+                  class="w-full rounded-xl border border-slate-700 bg-slate-900 pr-10 pl-4 py-2.5 text-xs sm:text-sm text-white focus:border-sky-400 outline-none transition-all" />
+                <svg class="w-4 h-4 text-slate-400 absolute right-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                 </svg>
               </div>
 
               <!-- نگهدارنده کارت‌های فاکتور -->
-              <div id="invoicesContainer" class="space-y-4">
-                <div class="text-center py-12 text-slate-500 text-xs">در حال دریافت لیست فاکتورها از سرور...</div>
+              <div id="invoicesContainer" class="space-y-5">
+                <div class="text-center py-12 text-slate-400 text-xs">در حال دریافت لیست فاکتورها از سرور...</div>
               </div>
 
             </div>
@@ -416,8 +427,8 @@
   <!-- مودال تغییر رمز عبور (CHANGE PASSWORD MODAL)                      -->
   <!-- ================================================================= -->
   <div id="passwordModal" class="fixed inset-0 bg-black/80 backdrop-blur-xs z-50 hidden items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-800 w-full max-w-sm rounded-3xl p-6 shadow-2xl animate-fade">
-      <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-slate-800">
+    <div class="bg-slate-800 border border-slate-700 w-full max-w-sm rounded-3xl p-6 shadow-2xl animate-fade">
+      <div class="flex items-center justify-between pb-3.5 mb-4 border-b border-slate-700">
         <h3 class="font-extrabold text-white text-sm sm:text-base">تغییر رمز عبور حساب</h3>
         <button onclick="closePasswordModal()" class="text-slate-400 hover:text-white p-1">✕</button>
       </div>
@@ -425,20 +436,20 @@
         <div>
           <label class="block text-xs font-bold text-slate-300 mb-1.5">رمز عبور فعلی</label>
           <input type="password" id="currentPassInput" required inputmode="numeric" placeholder="رمز فعلی را وارد کنید"
-            class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2.5 text-sm text-white focus:border-sky-400 outline-none text-center font-bold" />
+            class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3.5 py-2.5 text-sm text-white focus:border-sky-400 outline-none text-center font-bold" />
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-300 mb-1.5">رمز عبور جدید</label>
           <input type="password" id="newPassInput" required minlength="3" inputmode="numeric" placeholder="حداقل ۳ کاراکتر"
-            class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2.5 text-sm text-white focus:border-sky-400 outline-none text-center font-bold" />
+            class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3.5 py-2.5 text-sm text-white focus:border-sky-400 outline-none text-center font-bold" />
         </div>
         <div class="flex items-center justify-end gap-2 pt-2">
           <button type="button" onclick="closePasswordModal()"
-            class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700">
+            class="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-700 text-slate-200 hover:bg-slate-600">
             انصراف
           </button>
           <button type="submit" id="savePassBtn"
-            class="px-5 py-2.5 rounded-xl text-xs font-black bg-sky-500 hover:bg-sky-400 text-slate-950">
+            class="px-5 py-2.5 rounded-xl text-xs font-black bg-sky-400 hover:bg-sky-300 text-slate-950">
             ذخیره در سرور
           </button>
         </div>
@@ -451,31 +462,31 @@
   <!-- ================================================================= -->
   <div id="lightboxModal" class="fixed inset-0 bg-black/95 z-50 hidden items-center justify-center p-3 sm:p-6" onclick="closeLightbox()">
     <div class="relative max-w-4xl max-h-[92vh] w-full flex flex-col items-center animate-fade" onclick="event.stopPropagation()">
-      <div class="w-full flex items-center justify-between mb-3 px-3 py-2.5 bg-slate-900/90 border border-slate-800 rounded-2xl">
+      <div class="w-full flex items-center justify-between mb-3 px-3 py-2.5 bg-slate-800 border border-slate-700 rounded-2xl">
         <div class="overflow-hidden">
           <h4 id="lightboxTitle" class="text-xs sm:text-sm text-white font-extrabold truncate"></h4>
           <p id="lightboxMeta" class="text-[11px] text-slate-400 mt-0.5"></p>
         </div>
         <div class="flex items-center gap-2 shrink-0">
           <a id="lightboxDownload" href="#" download="invoice.jpg"
-            class="text-xs bg-sky-500 hover:bg-sky-400 text-slate-950 font-black px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors">
+            class="text-xs bg-sky-400 hover:bg-sky-300 text-slate-950 font-black px-3.5 py-2 rounded-xl flex items-center gap-1.5 transition-colors">
             <span>⬇️ دانلود تصویر</span>
           </a>
           <button onclick="closeLightbox()"
-            class="text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 w-9 h-9 rounded-xl font-bold flex items-center justify-center">
+            class="text-slate-300 hover:text-white bg-slate-700 hover:bg-slate-600 w-9 h-9 rounded-xl font-bold flex items-center justify-center">
             ✕
           </button>
         </div>
       </div>
-      <div class="w-full flex-grow overflow-auto flex items-center justify-center bg-slate-950/60 rounded-2xl border border-slate-800 p-2">
+      <div class="w-full flex-grow overflow-auto flex items-center justify-center bg-slate-950/80 rounded-2xl border border-slate-800 p-2">
         <img id="lightboxImg" src="" alt="تصویر فاکتور" class="max-w-full max-h-[78vh] rounded-xl object-contain shadow-2xl" />
       </div>
     </div>
   </div>
 
   <!-- فوتر -->
-  <footer class="text-center py-4 text-[11px] text-slate-500 border-t border-slate-900 bg-slate-950">
-    سامانه مدیریت و پیگیری فاکتور <span class="text-sky-400 font-bold">آبان کلکتور</span> | همگام‌سازی ابری چند دستگاهی
+  <footer class="text-center py-4 text-[11px] text-slate-400 border-t border-slate-800 bg-slate-900">
+    سامانه مدیریت فاکتور و کنترل تولید <span class="text-sky-400 font-bold">آبان کلکتور</span> | همگام‌سازی ابری ۳ کاربره
   </footer>
 
   <!-- ================================================================= -->
@@ -483,7 +494,22 @@
   <!-- ================================================================= -->
   <script>
     const DB_URL = "https://aban-collector-31893-default-rtdb.firebaseio.com";
-    const SESSION_KEY = "aban_collector_active_role_v4";
+    const SESSION_KEY = "aban_collector_active_role_v5";
+
+    // تعریف ۵ مرحله خط تولید کارخانه
+    const PRODUCTION_STEPS = [
+      { key: 'step_cnc',     label: '۱. تراش با CNC',         short: 'تراش CNC' },
+      { key: 'step_drill',   label: '۲. قلاویز و سوراخ‌کاری', short: 'قلاویز و سوراخ‌کاری' },
+      { key: 'step_plating', label: '۳. آبکاری',              short: 'آبکاری' },
+      { key: 'step_pack',    label: '۴. شیرینگ و بسته‌بندی',  short: 'بسته‌بندی' },
+      { key: 'step_sent',    label: '۵. ارسال شده نهایی',     short: 'ارسال نهایی' }
+    ];
+
+    const ROLE_META = {
+      majid:  { name: 'آقا مجید',   title: 'مدیریت سیستم',            badgeClass: 'bg-sky-500/15 text-sky-400 border border-sky-500/30' },
+      ahmadi: { name: 'خانم احمدی', title: 'هماهنگی و امور اداری',     badgeClass: 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30' },
+      kamali: { name: 'خانم کاملی', title: 'کنترل خط تولید کارخانه', badgeClass: 'bg-amber-500/15 text-amber-400 border border-amber-500/30' }
+    };
 
     let currentRole = null;
     let selectedLoginRole = null;
@@ -496,7 +522,7 @@
     // ۱. بررسی نشست ذخیره‌شده در LocalStorage هنگام باز شدن برنامه
     window.addEventListener('DOMContentLoaded', () => {
       const savedRole = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
-      if (savedRole === 'majid' || savedRole === 'ahmadi') {
+      if (savedRole && ROLE_META[savedRole]) {
         currentRole = savedRole;
         openDashboard();
       } else {
@@ -504,37 +530,37 @@
       }
     });
 
-    // بررسی اولیه ارتباط با دیتابیس فایربیس
     async function verifyServerConnection() {
       try {
         const res = await fetch(`${DB_URL}/passwords.json`, { cache: 'no-store' });
-        if (res.ok) {
-          setConnectionStatusUI(true);
-        } else {
-          setConnectionStatusUI(false);
-        }
+        setConnectionStatusUI(res.ok);
       } catch (e) {
         setConnectionStatusUI(false);
       }
     }
 
-    // ۲. انتخاب نقش در صفحه ورود
+    // ۲. انتخاب نقش در صفحه ورود (مجید / خانم احمدی / خانم کاملی)
     function selectRole(role) {
       selectedLoginRole = role;
       document.querySelectorAll('.role-card').forEach(card => {
-        card.classList.remove('border-sky-400', 'border-emerald-400', 'bg-slate-900', 'ring-2', 'ring-sky-400/20', 'ring-emerald-400/20');
-        card.classList.add('border-slate-800');
+        card.classList.remove(
+          'border-sky-400', 'border-emerald-400', 'border-amber-400',
+          'bg-slate-900', 'ring-2', 'ring-sky-400/20', 'ring-emerald-400/20', 'ring-amber-400/20'
+        );
+        card.classList.add('border-slate-700');
       });
 
       const activeCard = document.getElementById(`roleCard-${role}`);
-      activeCard.classList.remove('border-slate-800');
+      activeCard.classList.remove('border-slate-700');
       if (role === 'majid') {
         activeCard.classList.add('border-sky-400', 'bg-slate-900', 'ring-2', 'ring-sky-400/20');
-      } else {
+      } else if (role === 'ahmadi') {
         activeCard.classList.add('border-emerald-400', 'bg-slate-900', 'ring-2', 'ring-emerald-400/20');
+      } else {
+        activeCard.classList.add('border-amber-400', 'bg-slate-900', 'ring-2', 'ring-amber-400/20');
       }
 
-      document.getElementById('selectedRoleName').textContent = role === 'majid' ? 'آقا مجید' : 'خانم احمدی';
+      document.getElementById('selectedRoleName').textContent = ROLE_META[role].name;
       document.getElementById('loginForm').classList.remove('hidden');
       document.getElementById('loginErrorMsg').classList.add('hidden');
       
@@ -543,7 +569,7 @@
       passInput.focus();
     }
 
-    // ۳. احراز هویت و بررسی رمز عبور از مسیر passwords/{role}.json
+    // ۳. احراز هویت و بررسی رمز عبور در مسیر passwords/{role}.json
     async function handleLogin(e) {
       e.preventDefault();
       if (!selectedLoginRole) return;
@@ -558,10 +584,9 @@
         if (!res.ok) throw new Error('Database unreachable');
         const dbPass = await res.json();
 
-        // اگر رمزی در سرور ثبت نشده بود، مقدار پیش‌فرض 1234 است
+        // اگر رمزی ثبت نشده بود، پیش‌فرض 1234 است
         const validPass = (dbPass !== null && dbPass !== undefined) ? toEnglishDigits(String(dbPass)) : "1234";
 
-        // مقداردهی اولیه رمز در دیتابیس در صورت خالی بودن
         if (dbPass === null) {
           await fetch(`${DB_URL}/passwords/${selectedLoginRole}.json`, {
             method: 'PUT',
@@ -572,13 +597,12 @@
 
         if (enteredPass === validPass) {
           currentRole = selectedLoginRole;
-          const rememberMe = document.getElementById('rememberMeCheck').checked;
-          if (rememberMe) {
+          if (document.getElementById('rememberMeCheck').checked) {
             localStorage.setItem(SESSION_KEY, currentRole);
           } else {
             sessionStorage.setItem(SESSION_KEY, currentRole);
           }
-          showToast(`${currentRole === 'majid' ? 'آقا مجید' : 'خانم احمدی'} عزیز، خوش آمدید`, 'success');
+          showToast(`${ROLE_META[currentRole].name} عزیز، خوش آمدید`, 'success');
           openDashboard();
         } else {
           document.getElementById('loginErrorMsg').classList.remove('hidden');
@@ -608,52 +632,71 @@
       document.getElementById('loginView').classList.remove('hidden');
       document.getElementById('loginForm').classList.add('hidden');
       document.querySelectorAll('.role-card').forEach(card => {
-        card.classList.remove('border-sky-400', 'border-emerald-400', 'bg-slate-900', 'ring-2', 'ring-sky-400/20', 'ring-emerald-400/20');
-        card.classList.add('border-slate-800');
+        card.classList.remove(
+          'border-sky-400', 'border-emerald-400', 'border-amber-400',
+          'bg-slate-900', 'ring-2', 'ring-sky-400/20', 'ring-emerald-400/20', 'ring-amber-400/20'
+        );
+        card.classList.add('border-slate-700');
       });
-      showToast('با موفقیت از حساب خود خارج شدید', 'info');
+      showToast('با موفقیت از حساب کاربری خارج شدید', 'info');
     }
 
-    // ۵. باز کردن پنل اختصاصی کاربر (بدون هیچ‌گونه دکمه سوییچ بین دو پنل)
+    // ۵. باز کردن پنل اختصاصی بر اساس نقش (مجید / خانم احمدی / خانم کاملی)
     function openDashboard() {
       document.getElementById('loginView').classList.add('hidden');
       document.getElementById('dashboardView').classList.remove('hidden');
 
-      const isMajid = currentRole === 'majid';
-      document.getElementById('headerUserName').textContent = isMajid ? 'آقا مجید' : 'خانم احمدی';
+      const meta = ROLE_META[currentRole];
+      document.getElementById('headerUserName').textContent = meta.name;
       
       const badge = document.getElementById('headerRoleBadge');
-      badge.textContent = isMajid ? 'مدیر سیستم' : 'مسئول هماهنگی کارخانه';
-      badge.className = isMajid
-        ? 'text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-sky-500/15 text-sky-400 border border-sky-500/30'
-        : 'text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30';
+      badge.textContent = meta.title;
+      badge.className = `text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full ${meta.badgeClass}`;
 
       const majidCol = document.getElementById('majidFormColumn');
       const listCol = document.getElementById('invoiceListColumn');
-      const resetBtn = document.getElementById('btnResetAhmadi');
+      const resetBtn = document.getElementById('btnResetPasswords');
+      const filterPendingBtn = document.getElementById('filter-pending');
+      const filterSentBtn = document.getElementById('filter-sent');
 
-      if (isMajid) {
+      currentFilter = 'all';
+      setFilter('all');
+
+      if (currentRole === 'majid') {
         majidCol.classList.remove('hidden');
         listCol.className = 'lg:col-span-7';
         resetBtn.classList.remove('hidden');
         resetBtn.classList.add('inline-flex');
-        document.getElementById('listTitle').textContent = 'فاکتورهای ثبت و ارسال شده';
-        document.getElementById('listSubtitle').textContent = 'وضعیت فاکتورها پس از تأیید خانم احمدی به صورت خودکار سبز می‌شود';
-      } else {
+        filterPendingBtn.classList.remove('hidden');
+        filterSentBtn.textContent = '🟢 ارجاع به کارخانه';
+        document.getElementById('listTitle').textContent = 'فاکتورهای ثبت‌شده و رهگیری زنده خط تولید';
+        document.getElementById('listSubtitle').textContent = 'مشاهده لحظه‌ای وضعیت ارجاع خانم احمدی و ۵ مرحله تولید خانم کاملی';
+      } else if (currentRole === 'ahmadi') {
         majidCol.classList.add('hidden');
         listCol.className = 'lg:col-span-12';
         resetBtn.classList.add('hidden');
         resetBtn.classList.remove('inline-flex');
-        document.getElementById('listTitle').textContent = 'فاکتورهای دریافتی جهت ارسال به کارخانه';
-        document.getElementById('listSubtitle').textContent = 'پس از ارسال هر سفارش به کارخانه، دکمه سبز «تأیید ارسال به کارخانه» را بزنید';
+        filterPendingBtn.classList.remove('hidden');
+        filterSentBtn.textContent = '🟢 ارسال‌شده به کارخانه';
+        document.getElementById('listTitle').textContent = 'فاکتورهای دریافتی جهت ارجاع به کارخانه';
+        document.getElementById('listSubtitle').textContent = 'پس از تایید هر فاکتور، سفارش بلافاصله در پنل خط تولید خانم کاملی فعال می‌شود';
+      } else if (currentRole === 'kamali') {
+        majidCol.classList.add('hidden');
+        listCol.className = 'lg:col-span-12';
+        resetBtn.classList.add('hidden');
+        resetBtn.classList.remove('inline-flex');
+        filterPendingBtn.classList.add('hidden');
+        filterSentBtn.textContent = '🟢 تکمیل و ارسال نهایی';
+        document.getElementById('listTitle').textContent = 'پنل کنترل خط تولید کارخانه (خانم کاملی)';
+        document.getElementById('listSubtitle').textContent = 'فقط فاکتورهای تاییدشده توسط خانم احمدی نمایش داده می‌شوند • تیک هر مرحله را پس از انجام بزنید';
       }
 
       fetchInvoices();
       if (pollTimer) clearInterval(pollTimer);
-      pollTimer = setInterval(fetchInvoices, 3000);
+      pollTimer = setInterval(fetchInvoices, 2500);
     }
 
-    // ۶. واکشی مستمر اطلاعات از فایربیس (هر ۳ ثانیه یک‌بار)
+    // ۶. دریافت مستمر اطلاعات از فایربیس (هر ۲.۵ ثانیه یک‌بار)
     async function fetchInvoices() {
       try {
         const res = await fetch(`${DB_URL}/invoices.json`, { cache: 'no-store' });
@@ -661,10 +704,20 @@
         const data = await res.json();
 
         if (data && typeof data === 'object') {
-          invoicesList = Object.entries(data).map(([key, val]) => ({
-            ...val,
-            id: val.id || key
-          })).sort((a, b) => (b.createdAtTimestamp || 0) - (a.createdAtTimestamp || 0));
+          invoicesList = Object.entries(data).map(([key, val]) => {
+            // پشتیبانی همزمان از کلید جدید sentToFactory و کلید قدیمی sent
+            const isSentToFactory = Boolean(val.sentToFactory || val.sent);
+            return {
+              ...val,
+              id: val.id || key,
+              sentToFactory: isSentToFactory,
+              step_cnc: Boolean(val.step_cnc),
+              step_drill: Boolean(val.step_drill),
+              step_plating: Boolean(val.step_plating),
+              step_pack: Boolean(val.step_pack),
+              step_sent: Boolean(val.step_sent)
+            };
+          }).sort((a, b) => (b.createdAtTimestamp || 0) - (a.createdAtTimestamp || 0));
         } else {
           invoicesList = [];
         }
@@ -697,7 +750,7 @@
       });
     }
 
-    // ۷. فشرده‌سازی استاندارد تصویر فاکتور با HTML5 Canvas (عرض حداکثر 900px و کیفیت JPEG 0.7)
+    // ۷. فشرده‌سازی خودکار تصویر با HTML5 Canvas (حداکثر عرض 900px و کیفیت JPEG 0.65)
     function handleFileSelect(event) {
       const file = event.target.files[0];
       if (!file) return;
@@ -729,7 +782,7 @@
           ctx.fillRect(0, 0, width, height);
           ctx.drawImage(img, 0, 0, width, height);
 
-          compressedBase64Image = canvas.toDataURL('image/jpeg', 0.7);
+          compressedBase64Image = canvas.toDataURL('image/jpeg', 0.65);
           const kbSize = Math.round((compressedBase64Image.length * 3) / 4 / 1024);
           compressedImageMeta = `${width}×${height}px • ${kbSize} KB`;
 
@@ -757,14 +810,14 @@
       previewBox.classList.remove('flex');
     }
 
-    // ۸. ثبت و ارسال فاکتور جدید به فایربیس توسط آقا مجید
+    // ۸. ثبت و ارسال فاکتور جدید توسط آقا مجید
     async function handleCreateInvoice(e) {
       e.preventDefault();
       const title = document.getElementById('invTitle').value.trim();
       const majidNote = document.getElementById('invNote').value.trim();
 
       if (!title) {
-        showToast('لطفاً عنوان یا شماره فاکتور را وارد کنید', 'error');
+        showToast('لطفاً شماره یا عنوان فاکتور را وارد کنید', 'error');
         return;
       }
       if (!compressedBase64Image) {
@@ -784,10 +837,16 @@
         image: compressedBase64Image,
         imageMeta: compressedImageMeta,
         sent: false,
+        sentToFactory: false,
         createdAt: getPersianDateTime(),
         createdAtTimestamp: Date.now(),
         sentAt: null,
-        ahmadiNote: ''
+        ahmadiNote: '',
+        step_cnc: false,
+        step_drill: false,
+        step_plating: false,
+        step_pack: false,
+        step_sent: false
       };
 
       try {
@@ -810,12 +869,12 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
           </svg>
-          <span>ثبت و ارسال به خانم احمدی</span>
+          <span>ثبت و ارسال فاکتور به خانم احمدی</span>
         `;
       }
     }
 
-    // ۹. تأیید ارسال به کارخانه توسط خانم احمدی (تغییر sent به true و ثبت ساعت شمسی sentAt)
+    // ۹. تأیید ارسال به کارخانه توسط خانم احمدی (تغییر sentToFactory به true و ثبت ساعت)
     async function confirmSentToFactory(invoiceId) {
       const noteEl = document.getElementById(`factoryNote-${invoiceId}`);
       const ahmadiNote = noteEl ? noteEl.value.trim() : '';
@@ -823,7 +882,7 @@
 
       if (btnEl) {
         btnEl.disabled = true;
-        btnEl.textContent = 'در حال ثبت در سرور...';
+        btnEl.textContent = 'در حال ثبت و ارجاع به خط تولید...';
       }
 
       const exactPersianTime = getPersianDateTime();
@@ -834,13 +893,14 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             sent: true,
+            sentToFactory: true,
             sentAt: exactPersianTime,
             ahmadiNote: ahmadiNote
           })
         });
 
         if (!res.ok) throw new Error('Confirm failed');
-        showToast('ارسال فاکتور به کارخانه با موفقیت تأیید و ثبت شد', 'success');
+        showToast('فاکتور به کارخانه ارجاع شد و در پنل خانم کاملی قرار گرفت', 'success');
         fetchInvoices();
       } catch (err) {
         showToast('خطا در ثبت تأییدیه! اتصال اینترنت را بررسی کنید.', 'error');
@@ -851,7 +911,37 @@
       }
     }
 
-    // ۱۰. حذف فاکتور (مخصوص آقا مجید)
+    // ۱۰. ثبت و به‌روزرسانی تیک ۵ مرحله خط تولید توسط خانم کاملی
+    async function toggleProductionStep(invoiceId, stepKey, currentValue) {
+      if (currentRole !== 'kamali') return;
+      const newValue = !currentValue;
+
+      const payload = {
+        [stepKey]: newValue,
+        [`${stepKey}_at`]: newValue ? getPersianDateTime() : null
+      };
+
+      try {
+        const res = await fetch(`${DB_URL}/invoices/${invoiceId}.json`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error('Step update failed');
+
+        const stepObj = PRODUCTION_STEPS.find(s => s.key === stepKey);
+        showToast(
+          newValue ? `مرحله «${stepObj.short}» تیک خورد` : `تیک مرحله «${stepObj.short}» برداشته شد`,
+          newValue ? 'success' : 'info'
+        );
+        fetchInvoices();
+      } catch (err) {
+        showToast('خطا در ثبت مرحله تولید روی دیتابیس!', 'error');
+      }
+    }
+
+    // ۱۱. حذف فاکتور (مخصوص آقا مجید)
     async function deleteInvoice(invoiceId) {
       if (currentRole !== 'majid') return;
       if (!confirm('آیا از حذف دائمی این فاکتور اطمینان دارید؟')) return;
@@ -868,11 +958,35 @@
       }
     }
 
-    // ۱۱. فیلتر، جستجو و رندر لیست فاکتورها
+    // ۱۲. محاسبه وضعیت و درصد پیشرفت تولید هر فاکتور
+    function getProductionProgressInfo(inv) {
+      const completedSteps = PRODUCTION_STEPS.filter(s => Boolean(inv[s.key]));
+      const count = completedSteps.length;
+      const percent = Math.round((count / PRODUCTION_STEPS.length) * 100);
+
+      let currentStageText = 'در انتظار شروع تولید در کارخانه';
+      if (!inv.sentToFactory) {
+        currentStageText = 'در انتظار تایید و ارجاع خانم احمدی';
+      } else if (inv.step_sent) {
+        currentStageText = 'تکمیل و ارسال شده نهایی ✅';
+      } else if (count > 0) {
+        const lastCompleted = completedSteps[completedSteps.length - 1];
+        const lastIdx = PRODUCTION_STEPS.findIndex(s => s.key === lastCompleted.key);
+        const nextStep = PRODUCTION_STEPS[lastIdx + 1];
+        currentStageText = nextStep
+          ? `انجام‌شده: ${lastCompleted.short} ⬅️ مرحله بعد: ${nextStep.short}`
+          : `در مرحله: ${lastCompleted.short}`;
+      }
+
+      return { count, percent, currentStageText, isFinished: Boolean(inv.step_sent) };
+    }
+
+    // ۱۳. فیلتر، جستجو و رندر لیست فاکتورها
     function setFilter(filter) {
       currentFilter = filter;
       ['all', 'pending', 'sent'].forEach(f => {
         const btn = document.getElementById(`filter-${f}`);
+        if (!btn) return;
         btn.className = (f === filter)
           ? 'px-3 py-1.5 rounded-lg font-bold bg-slate-800 text-white shadow transition-all'
           : 'px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all';
@@ -882,18 +996,35 @@
 
     function renderInvoices() {
       const totalCount = invoicesList.length;
-      const pendingCount = invoicesList.filter(i => !i.sent).length;
-      const sentCount = invoicesList.filter(i => Boolean(i.sent)).length;
+      const pendingCount = invoicesList.filter(i => !i.sentToFactory).length;
+      const inFactoryCount = invoicesList.filter(i => i.sentToFactory && !i.step_sent).length;
+      const completedCount = invoicesList.filter(i => i.sentToFactory && i.step_sent).length;
 
       document.getElementById('statTotal').textContent = totalCount;
       document.getElementById('statPending').textContent = pendingCount;
-      document.getElementById('statSent').textContent = sentCount;
+      document.getElementById('statInFactory').textContent = inFactoryCount;
+      document.getElementById('statCompleted').textContent = completedCount;
+
+      // جلوگیری از پرش صفحه در حین تایپ خانم احمدی در فیلد یادداشت
+      const activeElement = document.activeElement;
+      if (activeElement && activeElement.id && activeElement.id.startsWith('factoryNote-')) {
+        return;
+      }
 
       const searchVal = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
 
-      let filtered = invoicesList.filter(inv => {
-        if (currentFilter === 'pending' && inv.sent) return false;
-        if (currentFilter === 'sent' && !inv.sent) return false;
+      // در پنل خانم کاملی فقط فاکتورهایی که خانم احمدی تایید کرده (sentToFactory: true) نمایش داده می‌شوند
+      let baseList = currentRole === 'kamali'
+        ? invoicesList.filter(inv => inv.sentToFactory)
+        : invoicesList;
+
+      let filtered = baseList.filter(inv => {
+        if (currentRole === 'kamali') {
+          if (currentFilter === 'sent' && !inv.step_sent) return false;
+        } else {
+          if (currentFilter === 'pending' && inv.sentToFactory) return false;
+          if (currentFilter === 'sent' && !inv.sentToFactory) return false;
+        }
         if (searchVal) {
           const hay = `${inv.title || ''} ${inv.majidNote || ''} ${inv.ahmadiNote || ''}`.toLowerCase();
           return hay.includes(searchVal);
@@ -903,52 +1034,143 @@
 
       const container = document.getElementById('invoicesContainer');
 
-      // جلوگیری از پرش صفحه در حین تایپ خانم احمدی در فیلد یادداشت کارخانه
-      const activeElement = document.activeElement;
-      if (activeElement && activeElement.id && activeElement.id.startsWith('factoryNote-')) {
-        return;
-      }
-
       if (filtered.length === 0) {
         container.innerHTML = `
-          <div class="text-center py-12 px-4 bg-slate-950/50 border border-dashed border-slate-800 rounded-2xl">
-            <p class="text-sm text-slate-400 font-bold">هیچ فاکتوری در این بخش یافت نشد</p>
-            <p class="text-xs text-slate-500 mt-1">هر فاکتور جدید به صورت خودکار و بدون نیاز به رفرش در این لیست ظاهر می‌شود.</p>
+          <div class="text-center py-12 px-4 bg-slate-900/60 border border-dashed border-slate-700 rounded-2xl">
+            <p class="text-sm text-slate-300 font-bold">هیچ فاکتوری در این بخش یافت نشد</p>
+            <p class="text-xs text-slate-500 mt-1">
+              ${currentRole === 'kamali'
+                ? 'به محض اینکه خانم احمدی فاکتوری را به کارخانه ارجاع دهد، فوراً در اینجا نمایش داده می‌شود.'
+                : 'هر فاکتور جدید به صورت خودکار و بدون نیاز به رفرش در این لیست ظاهر می‌شود.'}
+            </p>
           </div>
         `;
         return;
       }
 
       container.innerHTML = filtered.map(inv => {
-        const isSent = Boolean(inv.sent);
+        const isSentToFactory = Boolean(inv.sentToFactory);
+        const prog = getProductionProgressInfo(inv);
 
-        const statusBadge = isSent
+        // برچسب وضعیت ارجاع اداری
+        const adminBadge = isSentToFactory
           ? `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
-               <span>🟢 ارسال‌شده به کارخانه</span>
+               <span>🟢 ارسال‌شده به کارخانه${inv.sentAt ? ` (${inv.sentAt})` : ''}</span>
              </span>`
           : `<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold bg-amber-500/15 text-amber-300 border border-amber-500/30">
                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-               <span>🟡 در انتظار ارسال به کارخانه</span>
+               <span>🟡 در انتظار ارسال خانم احمدی</span>
              </span>`;
 
+        // بخش ویژه «مرحله تولید» (نوار وضعیت زنده ۵ مرحله‌ای برای پنل آقا مجید و خانم احمدی)
+        const productionStatusBarHTML = `
+          <div class="mt-4 bg-slate-900/95 border ${prog.isFinished ? 'border-emerald-500/40' : 'border-slate-700/80'} rounded-2xl p-3.5">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-black text-sky-400">⚙️ مرحله تولید کارخانه:</span>
+                <span class="text-xs font-bold ${prog.isFinished ? 'text-emerald-400' : 'text-slate-200'}">${prog.currentStageText}</span>
+              </div>
+              <span class="text-[11px] font-black px-2.5 py-0.5 rounded-full ${prog.isFinished ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'bg-slate-800 text-sky-400 border border-slate-700'}">
+                ${prog.count} از ۵ مرحله (${prog.percent}%)
+              </span>
+            </div>
+
+            <!-- نوار پیشرفت پیوسته -->
+            <div class="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden mb-3 border border-slate-700/60">
+              <div class="h-full transition-all duration-500 ${prog.isFinished ? 'bg-emerald-500' : 'bg-sky-400'}" style="width: ${prog.percent}%"></div>
+            </div>
+
+            <!-- نمایش ۵ ایستگاه کاری به صورت تگ‌های وضعیت -->
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+              ${PRODUCTION_STEPS.map(step => {
+                const done = Boolean(inv[step.key]);
+                return `
+                  <div class="px-2.5 py-2 rounded-xl border text-[11px] font-bold flex items-center gap-1.5 ${
+                    done
+                      ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300'
+                      : 'bg-slate-950/60 border-slate-800 text-slate-500'
+                  }">
+                    <span>${done ? '✅' : '⚪'}</span>
+                    <span class="truncate">${step.short}</span>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+
+        // چک‌لیست تعاملی ۵ مرحله‌ای مخصوص پنل خانم کاملی (کنترل خط تولید کارخانه)
+        const kamaliChecklistHTML = currentRole === 'kamali' ? `
+          <div class="mt-4 bg-slate-900 border border-slate-700 rounded-2xl p-4">
+            <div class="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-800">
+              <div>
+                <h5 class="text-xs sm:text-sm font-black text-amber-400">🛠️ چک‌لیست ۵ مرحله‌ای خط تولید کارخانه</h5>
+                <p class="text-[11px] text-slate-400 mt-0.5">با انجام هر مرحله، روی آن بزنید تا تیک بخورد و در پنل آقا مجید ثبت شود</p>
+              </div>
+              <span class="text-xs font-black px-2.5 py-1 rounded-xl ${prog.isFinished ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-sky-400'}">
+                ${prog.count} / 5
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              ${PRODUCTION_STEPS.map(step => {
+                const isChecked = Boolean(inv[step.key]);
+                const stepTime = inv[`${step.key}_at`];
+                return `
+                  <button type="button" onclick="toggleProductionStep('${inv.id}', '${step.key}', ${isChecked})"
+                    class="w-full text-right p-3.5 rounded-xl border-2 transition-all flex items-center justify-between gap-2 ${
+                      isChecked
+                        ? 'bg-emerald-500/15 border-emerald-500 text-emerald-200 shadow-md shadow-emerald-500/5'
+                        : 'bg-slate-950/80 border-slate-800 hover:border-sky-400/60 text-slate-200'
+                    }">
+                    <div class="flex items-center gap-3">
+                      <div class="w-6 h-6 rounded-lg flex items-center justify-center font-black text-xs ${
+                        isChecked ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 border border-slate-600 text-transparent'
+                      }">
+                        ✓
+                      </div>
+                      <div>
+                        <div class="text-xs sm:text-sm font-extrabold">${step.label}</div>
+                        ${isChecked && stepTime ? `<div class="text-[10px] text-emerald-400 mt-0.5">ثبت: ${stepTime}</div>` : ''}
+                      </div>
+                    </div>
+                    <span class="text-[11px] font-bold px-2 py-0.5 rounded-md ${
+                      isChecked ? 'bg-emerald-500/20 text-emerald-300' : 'bg-slate-800 text-slate-400'
+                    }">
+                      ${isChecked ? 'انجام شد' : 'در انتظار'}
+                    </span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        ` : '';
+
         return `
-          <div class="rounded-2xl border ${isSent ? 'border-emerald-500/40 bg-emerald-950/15' : 'border-slate-800 bg-slate-950/80'} p-4 sm:p-5 transition-all shadow-sm">
+          <div class="rounded-2xl border ${
+            prog.isFinished
+              ? 'border-emerald-500/50 bg-emerald-950/15'
+              : isSentToFactory
+              ? 'border-sky-500/30 bg-slate-900/90'
+              : 'border-slate-700/80 bg-slate-900/75'
+          } p-4 sm:p-5 transition-all shadow-md">
             
-            <!-- ردیف بالا: تصویر بندانگشتی، عنوان، زمان ثبت و برچسب وضعیت -->
-            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3.5 pb-3.5 border-b border-slate-800/80">
+            <!-- ردیف بالا: تصویر فاکتور، عنوان، ساعت ثبت و وضعیت ارجاع -->
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3.5 pb-3.5 border-b border-slate-800">
               <div class="flex items-start gap-3.5">
                 <div onclick="openLightbox('${inv.id}')"
-                  class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-slate-900 border border-slate-700 overflow-hidden cursor-pointer shrink-0 relative group">
+                  class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-950 border border-slate-700 overflow-hidden cursor-pointer shrink-0 relative group shadow">
                   <img src="${inv.image}" alt="${escapeHtml(inv.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  <div class="absolute inset-x-0 bottom-0 bg-black/70 text-[10px] text-center py-0.5 text-sky-300 font-bold">بزرگنمایی</div>
                 </div>
                 <div>
                   <h4 class="font-extrabold text-white text-sm sm:text-base leading-snug">${escapeHtml(inv.title)}</h4>
-                  <p class="text-[11px] text-slate-400 mt-1">زمان ثبت توسط آقا مجید: <span class="text-slate-300 font-semibold">${inv.createdAt || '-'}</span></p>
+                  <p class="text-[11px] text-slate-400 mt-1">ساعت ثبت فاکتور: <span class="text-slate-200 font-semibold">${inv.createdAt || '-'}</span></p>
                   
                   <div class="flex flex-wrap items-center gap-2 mt-2.5">
                     <button type="button" onclick="openLightbox('${inv.id}')"
-                      class="text-[11px] font-bold text-sky-400 bg-sky-500/10 hover:bg-sky-500/20 border border-sky-500/20 px-2.5 py-1 rounded-lg transition-colors">
-                      🔍 مشاهده و بزرگنمایی فاکتور
+                      class="text-[11px] font-bold text-sky-400 bg-sky-400/10 hover:bg-sky-400/20 border border-sky-400/20 px-2.5 py-1 rounded-lg transition-colors">
+                      🔍 مشاهده واضح فاکتور
                     </button>
                     <a href="${inv.image}" download="${escapeHtml(inv.title)}.jpg"
                       class="text-[11px] font-bold text-slate-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded-lg transition-colors">
@@ -964,49 +1186,56 @@
                 </div>
               </div>
 
-              <div class="self-start">${statusBadge}</div>
+              <div class="self-start">${adminBadge}</div>
             </div>
 
             <!-- نمایش توضیحات مجید در صورت وجود -->
             ${inv.majidNote ? `
-              <div class="mt-3 text-xs bg-slate-900/90 border border-slate-800 rounded-xl p-3 text-slate-300 leading-relaxed">
-                <span class="font-bold text-sky-400">یادداشت آقا مجید:</span> ${escapeHtml(inv.majidNote)}
+              <div class="mt-3 text-xs bg-slate-950/80 border border-slate-800 rounded-xl p-3 text-slate-300 leading-relaxed">
+                <span class="font-bold text-sky-400">یادداشت مدیریت (آقا مجید):</span> ${escapeHtml(inv.majidNote)}
               </div>
             ` : ''}
 
-            <!-- بخش وضعیت نهایی یا دکمه تأیید ارسال به کارخانه -->
-            ${isSent ? `
-              <div class="mt-3.5 bg-emerald-500/10 border border-emerald-500/25 rounded-xl p-3.5 text-xs">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-emerald-300 font-extrabold">
-                  <span>✅ ارسال به کارخانه توسط خانم احمدی تأیید شده است</span>
-                  <span class="text-emerald-400">ساعت دقیق ارسال: ${inv.sentAt || '-'}</span>
-                </div>
-                ${inv.ahmadiNote ? `
-                  <div class="mt-2 pt-2 border-t border-emerald-500/20 text-slate-200">
-                    <span class="font-bold text-emerald-400">توضیحات / کد پیگیری کارخانه:</span> ${escapeHtml(inv.ahmadiNote)}
-                  </div>
-                ` : ''}
+            <!-- نمایش توضیحات خانم احمدی در صورت وجود -->
+            ${inv.ahmadiNote ? `
+              <div class="mt-2.5 text-xs bg-emerald-950/30 border border-emerald-500/20 rounded-xl p-3 text-emerald-200 leading-relaxed">
+                <span class="font-bold text-emerald-400">توضیحات ارجاع اداری (خانم احمدی):</span> ${escapeHtml(inv.ahmadiNote)}
               </div>
-            ` : `
-              ${currentRole === 'ahmadi' ? `
-                <div class="mt-4 pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
-                  <input type="text" id="factoryNote-${inv.id}" placeholder="یادداشت یا کد پیگیری تحویل به کارخانه (اختیاری)..."
-                    class="flex-grow rounded-xl border border-slate-700 bg-slate-900 px-3.5 py-3 text-xs text-white focus:border-emerald-400 outline-none" />
-                  <button type="button" id="confirmBtn-${inv.id}" onclick="confirmSentToFactory('${inv.id}')"
-                    class="py-3 px-5 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-emerald-500/20 transition-all shrink-0 flex items-center justify-center gap-2">
-                    <span>تأیید ارسال به کارخانه (زدن تیک)</span>
-                    <span>✅</span>
-                  </button>
-                </div>
-              ` : ''}
-            `}
+            ` : ''}
+
+            <!-- دکمه تایید ارسال به کارخانه مخصوص خانم احمدی (وقتی هنوز ارسال نشده) -->
+            ${!isSentToFactory && currentRole === 'ahmadi' ? `
+              <div class="mt-4 pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+                <input type="text" id="factoryNote-${inv.id}" placeholder="یادداشت ارجاع به کارخانه (اختیاری)..."
+                  class="flex-grow rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-3 text-xs text-white focus:border-emerald-400 outline-none" />
+                <button type="button" id="confirmBtn-${inv.id}" onclick="confirmSentToFactory('${inv.id}')"
+                  class="py-3.5 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-emerald-500/20 transition-all shrink-0 flex items-center justify-center gap-2">
+                  <span>تأیید ارسال به کارخانه (زدن تیک)</span>
+                  <span>✅</span>
+                </button>
+              </div>
+            ` : ''}
+
+            <!-- نمایش قفل و سبز شدن وضعیت برای خانم احمدی پس از زدن تیک -->
+            ${isSentToFactory && currentRole === 'ahmadi' ? `
+              <div class="mt-3.5 bg-emerald-500/15 border border-emerald-500/30 rounded-xl px-4 py-3 flex items-center justify-between text-xs text-emerald-300 font-extrabold">
+                <span>🔒 ارسال به کارخانه تایید و قفل شد</span>
+                <span>زمان ارجاع: ${inv.sentAt || '-'}</span>
+              </div>
+            ` : ''}
+
+            <!-- نمایش نوار وضعیت زنده ۵ مرحله تولید برای آقا مجید و خانم احمدی -->
+            ${currentRole !== 'kamali' ? productionStatusBarHTML : ''}
+
+            <!-- نمایش چک‌لیست ۵ مرحله‌ای تولید برای خانم کاملی -->
+            ${kamaliChecklistHTML}
 
           </div>
         `;
       }).join('');
     }
 
-    // ۱۲. تغییر رمز عبور و بازنشانی رمز در سرور
+    // ۱۴. تغییر رمز عبور و بازنشانی رمزها در دیتابیس آنلاین
     function openPasswordModal() {
       document.getElementById('currentPassInput').value = '';
       document.getElementById('newPassInput').value = '';
@@ -1058,25 +1287,30 @@
       }
     }
 
-    async function resetAhmadiPassword() {
+    async function resetStaffPasswords() {
       if (currentRole !== 'majid') return;
-      if (!confirm('آیا مطمئن هستید که می‌خواهید رمز عبور خانم احمدی را به 1234 بازنشانی کنید؟')) return;
+      if (!confirm('آیا می‌خواهید رمز عبور خانم احمدی و خانم کاملی هر دو به 1234 بازنشانی شود؟')) return;
 
       try {
-        const res = await fetch(`${DB_URL}/passwords/ahmadi.json`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify("1234")
-        });
-        if (res.ok) {
-          showToast('رمز عبور خانم احمدی به 1234 بازنشانی شد', 'success');
-        }
+        await Promise.all([
+          fetch(`${DB_URL}/passwords/ahmadi.json`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify("1234")
+          }),
+          fetch(`${DB_URL}/passwords/kamali.json`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify("1234")
+          })
+        ]);
+        showToast('رمز عبور خانم احمدی و خانم کاملی به 1234 بازنشانی شد', 'success');
       } catch (err) {
         showToast('خطا در بازنشانی رمز عبور', 'error');
       }
     }
 
-    // ۱۳. بزرگنمایی تصویر فاکتور (Lightbox)
+    // ۱۵. بزرگنمایی تصویر فاکتور (Lightbox)
     function openLightbox(invId) {
       const inv = invoicesList.find(i => i.id === invId);
       if (!inv) return;
@@ -1098,15 +1332,14 @@
       document.getElementById('lightboxModal').classList.remove('flex');
     }
 
-    // ۱۴. توابع کمکی (تاریخ شمسی، تبدیل اعداد فارسی به انگلیسی، اعلان)
+    // ۱۶. توابع کمکی (تاریخ شمسی، تبدیل ارقام فارسی، اعلان)
     function getPersianDateTime() {
       return new Intl.DateTimeFormat('fa-IR', {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
         hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
+        minute: '2-digit'
       }).format(new Date());
     }
 
@@ -1131,7 +1364,7 @@
       const styles = {
         success: 'bg-emerald-500 text-slate-950',
         error: 'bg-rose-600 text-white',
-        info: 'bg-slate-800 text-white border border-slate-700'
+        info: 'bg-slate-800 text-white border border-slate-600'
       };
       const el = document.createElement('div');
       el.className = `pointer-events-auto px-4 py-3 rounded-2xl shadow-2xl text-xs font-extrabold ${styles[type]} animate-fade`;
