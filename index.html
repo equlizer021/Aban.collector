@@ -53,12 +53,175 @@
     ::-webkit-scrollbar-track { background: #0f172a; }
     ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
     ::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* ================================================================= */
+    /* تنظیمات اختصاصی چاپ و خروجی PDF در دو قطع A4 و A5 (@media print) */
+    /* ================================================================= */
+    #printVoucherSheet {
+      display: none;
+    }
+
+    @media print {
+      html, body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      /* مخفی‌سازی کامل رابط کاربری دارک‌مود، منوها، دکمه‌ها و مراحل تولید */
+      #app,
+      #toastContainer,
+      #passwordModal,
+      #lightboxModal,
+      footer,
+      datalist {
+        display: none !important;
+      }
+
+      /* نمایش برگه رسمی حواله خروج کالا */
+      #printVoucherSheet {
+        display: block !important;
+        width: 100% !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        direction: rtl !important;
+        box-sizing: border-box !important;
+      }
+
+      /* استایل پایه اجزای برگه چاپ */
+      .pv-container {
+        border: 2px solid #0f172a;
+        border-radius: 10px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+      .pv-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #0f172a;
+        background-color: #f8fafc !important;
+      }
+      .pv-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .pv-logo-box {
+        background-color: #000000 !important;
+        border: 1.5px solid #0f172a;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .pv-meta-box {
+        text-align: left;
+        font-size: 12px;
+        line-height: 1.6;
+      }
+      .pv-info-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        border-bottom: 2px solid #0f172a;
+        background-color: #ffffff !important;
+      }
+      .pv-info-cell {
+        border-left: 1px solid #cbd5e1;
+      }
+      .pv-info-cell:last-child {
+        border-left: none;
+      }
+      .pv-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: right;
+      }
+      .pv-table th {
+        background-color: #e2e8f0 !important;
+        color: #0f172a !important;
+        border-bottom: 1.5px solid #0f172a;
+        border-left: 1px solid #94a3b8;
+        font-weight: 800;
+      }
+      .pv-table th:last-child {
+        border-left: none;
+      }
+      .pv-table td {
+        border-bottom: 1px solid #cbd5e1;
+        border-left: 1px solid #cbd5e1;
+        color: #0f172a !important;
+      }
+      .pv-table td:last-child {
+        border-left: none;
+      }
+      .pv-table tfoot td {
+        background-color: #f1f5f9 !important;
+        border-top: 2px solid #0f172a;
+        border-bottom: 2px solid #0f172a;
+        font-weight: 900;
+      }
+      .pv-note-row {
+        border-bottom: 1.5px solid #0f172a;
+        background-color: #fafafa !important;
+      }
+      .pv-signatures {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .pv-sig-box {
+        border: 1.5px dashed #475569;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      /* ۱. تنظیمات اختصاصی قطع A4 */
+      body.print-a4 .pv-header { padding: 14px 18px; }
+      body.print-a4 .pv-logo-box { width: 52px; height: 52px; padding: 6px; }
+      body.print-a4 .pv-title { font-size: 19px; font-weight: 900; }
+      body.print-a4 .pv-subtitle { font-size: 12px; color: #334155; margin-top: 2px; font-weight: 700; }
+      body.print-a4 .pv-info-cell { padding: 9px 12px; font-size: 12px; }
+      body.print-a4 .pv-table th,
+      body.print-a4 .pv-table td { padding: 8px 10px; font-size: 12.5px; }
+      body.print-a4 .pv-note-row { padding: 8px 12px; font-size: 12px; }
+      body.print-a4 .pv-signatures { padding: 16px; }
+      body.print-a4 .pv-sig-box { min-height: 95px; padding: 10px 14px; font-size: 12px; }
+
+      /* ۲. تنظیمات فشرده‌سازی اختصاصی قطع A5 */
+      body.print-a5 .pv-header { padding: 8px 12px; }
+      body.print-a5 .pv-logo-box { width: 38px; height: 38px; padding: 4px; }
+      body.print-a5 .pv-title { font-size: 14px; font-weight: 900; }
+      body.print-a5 .pv-subtitle { font-size: 10px; color: #334155; margin-top: 1px; font-weight: 700; }
+      body.print-a5 .pv-meta-box { font-size: 10px; line-height: 1.4; }
+      body.print-a5 .pv-info-cell { padding: 5px 8px; font-size: 10px; }
+      body.print-a5 .pv-table th,
+      body.print-a5 .pv-table td { padding: 4.5px 6px; font-size: 10.5px; }
+      body.print-a5 .pv-note-row { padding: 5px 8px; font-size: 10px; }
+      body.print-a5 .pv-signatures { padding: 10px; gap: 12px; }
+      body.print-a5 .pv-sig-box { min-height: 64px; padding: 6px 10px; font-size: 10px; }
+    }
   </style>
+  <!-- تگ داینامیک تنظیم @page برای سوئیچ دقیق بین A4 و A5 -->
+  <style id="dynamicPrintPageStyle"></style>
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-sky-400 selection:text-slate-950">
 
   <!-- Toast Notifications Container -->
   <div id="toastContainer" class="fixed top-4 left-4 right-4 sm:left-6 sm:right-auto z-50 flex flex-col gap-2.5 max-w-sm w-full pointer-events-none"></div>
+
+  <!-- Datalists for Two-Way Auto-Complete in Voucher Rows -->
+  <datalist id="productsCodeList"></datalist>
+  <datalist id="productsNameList"></datalist>
+
+  <!-- ظرف مخصوص چاپ رسمی حواله خروج کالا (فقط در زمان پرینت نمایش داده می‌شود) -->
+  <div id="printVoucherSheet" aria-hidden="true"></div>
 
   <!-- Main App Wrapper -->
   <div id="app" class="flex-grow flex flex-col">
@@ -71,7 +234,7 @@
         
         <!-- Header & Brand Logo -->
         <div class="bg-gradient-to-b from-slate-900 via-slate-900 to-slate-800 p-6 sm:p-8 text-center border-b border-slate-700/80 relative">
-          <!-- لوگوی اختصاصی آبان کلکتور[cite: 1, 3] -->
+          <!-- لوگوی اختصاصی آبان کلکتور -->
           <div class="w-20 h-20 mx-auto rounded-2xl bg-black border border-sky-400/30 p-3 shadow-2xl flex items-center justify-center mb-4">
             <svg viewBox="0 0 200 200" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M100 18 L42 120 H57 L100 44 L143 120 H158 L100 18 Z" fill="#18627c"/>
@@ -192,7 +355,7 @@
           
           <!-- مشخصات کاربر فعال و لوگو -->
           <div class="flex items-center gap-3">
-            <!-- لوگوی اختصاصی آبان کلکتور[cite: 1, 3] -->
+            <!-- لوگوی اختصاصی آبان کلکتور -->
             <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-black p-1.5 border border-slate-700 flex items-center justify-center shrink-0 shadow">
               <svg viewBox="0 0 200 200" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M100 18 L42 120 H57 L100 44 L143 120 H158 L100 18 Z" fill="#18627c"/>
@@ -210,7 +373,7 @@
               </div>
               <div class="flex items-center gap-1.5 mt-1">
                 <span id="headerConnDot" class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span id="headerConnText" class="text-[11px] text-emerald-400 font-medium">آنلاین (بروزرسانی خودکار ۲.۵ ثانیه‌ای)</span>
+                <span id="headerConnText" class="text-[11px] text-emerald-400 font-medium">آنلاین (همگام‌سازی خودکار ۲ ثانیه‌ای)</span>
               </div>
             </div>
           </div>
@@ -292,24 +455,42 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
           
           <!-- ========================================================= -->
-          <!-- ستون فرم ثبت فاکتور جدید (فقط مخصوص آقا مجید)             -->
+          <!-- ستون فرم‌های مدیریتی آقا مجید (دارای ۳ تب اصلی)           -->
           <!-- ========================================================= -->
           <div id="majidFormColumn" class="hidden lg:col-span-5">
-            <div class="bg-slate-800 border border-slate-700/90 rounded-3xl p-5 sm:p-6 sticky top-24 shadow-xl">
-              <div class="flex items-center gap-3 pb-4 mb-5 border-b border-slate-700/80">
+            <div class="bg-slate-800 border border-slate-700/90 rounded-3xl p-5 sm:p-6 lg:sticky lg:top-24 shadow-xl">
+              <div class="flex items-center gap-3 pb-4 mb-4 border-b border-slate-700/80">
                 <div class="w-10 h-10 rounded-xl bg-sky-400/10 text-sky-400 border border-sky-400/20 flex items-center justify-center shrink-0">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/>
                   </svg>
                 </div>
                 <div>
-                  <h3 class="font-extrabold text-white text-base">ثبت و ارسال فاکتور جدید</h3>
-                  <p class="text-xs text-slate-400 mt-0.5">فشرده‌سازی خودکار و ارسال به خانم احمدی</p>
+                  <h3 class="font-extrabold text-white text-base">ثبت فاکتور / حواله خروج / بانک قطعات</h3>
+                  <p class="text-xs text-slate-400 mt-0.5">مدیریت سفارشات و بانک محصولات آبان کلکتور</p>
                 </div>
               </div>
 
+              <!-- دکمه‌های ۳ تب اصلی پنل آقا مجید -->
+              <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-900 rounded-2xl border border-slate-700/80 mb-5">
+                <button type="button" id="majidTabBtn-image" onclick="switchMajidTab('image')"
+                  class="py-2.5 px-1.5 rounded-xl text-[11px] font-extrabold transition-all bg-sky-400 text-slate-950 shadow truncate">
+                  📷 تصویر فاکتور
+                </button>
+                <button type="button" id="majidTabBtn-voucher" onclick="switchMajidTab('voucher')"
+                  class="py-2.5 px-1.5 rounded-xl text-[11px] font-bold transition-all text-slate-300 hover:text-white truncate">
+                  📑 حواله خروج کالا
+                </button>
+                <button type="button" id="majidTabBtn-products" onclick="switchMajidTab('products')"
+                  class="py-2.5 px-1.5 rounded-xl text-[11px] font-bold transition-all text-slate-300 hover:text-white truncate">
+                  📦 بانک قطعات (<span id="productsTabCount">0</span>)
+                </button>
+              </div>
+
+              <!-- ===================================================== -->
+              <!-- تب ۱: آپلود تصویر فاکتور                              -->
+              <!-- ===================================================== -->
               <form id="createInvoiceForm" onsubmit="handleCreateInvoice(event)" class="space-y-4">
-                <!-- شماره یا عنوان فاکتور / سفارش -->
                 <div>
                   <label for="invTitle" class="block text-xs font-bold text-slate-200 mb-1.5">
                     شماره یا عنوان فاکتور / سفارش <span class="text-rose-400">*</span>
@@ -318,7 +499,6 @@
                     class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3.5 py-3 text-xs sm:text-sm text-white focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all" />
                 </div>
 
-                <!-- بارگذاری تصویر فاکتور همراه با فشرده‌سازی Canvas (حداکثر عرض 900px و کیفیت JPEG 0.65) -->
                 <div>
                   <label class="block text-xs font-bold text-slate-200 mb-1.5">
                     تصویر فاکتور <span class="text-rose-400">*</span>
@@ -326,7 +506,6 @@
                   <label for="invFile"
                     class="flex flex-col items-center justify-center w-full min-h-[150px] border-2 border-dashed border-slate-600 hover:border-sky-400 rounded-2xl cursor-pointer bg-slate-900/70 hover:bg-slate-900 transition-all p-4 text-center">
                     
-                    <!-- حالت قبل از انتخاب عکس -->
                     <div id="uploadPrompt" class="flex flex-col items-center">
                       <div class="w-12 h-12 rounded-2xl bg-sky-400/10 text-sky-400 flex items-center justify-center mb-2">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
@@ -338,7 +517,6 @@
                       <span class="text-[11px] text-slate-400 mt-1">فشرده‌سازی خودکار (حداکثر عرض 900px • کیفیت JPEG 0.65)</span>
                     </div>
 
-                    <!-- حالت پیش‌نمایش بعد از انتخاب و فشرده‌سازی عکس -->
                     <div id="uploadPreviewBox" class="hidden flex-col items-center w-full">
                       <img id="uploadMiniPreview" src="" alt="پیش‌نمایش فاکتور" class="max-h-32 rounded-xl object-contain mb-2.5 border border-slate-700 shadow-md" />
                       <span id="selectedFileBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-300 border border-emerald-500/30"></span>
@@ -349,7 +527,6 @@
                   </label>
                 </div>
 
-                <!-- توضیحات اختیاری مجید -->
                 <div>
                   <label for="invNote" class="block text-xs font-bold text-slate-200 mb-1.5">
                     یادداشت یا توضیحات سفارش (اختیاری)
@@ -358,15 +535,181 @@
                     class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3.5 py-2.5 text-xs sm:text-sm text-white focus:border-sky-400 focus:ring-2 focus:ring-sky-400/20 outline-none transition-all resize-none"></textarea>
                 </div>
 
-                <!-- دکمه ثبت نهایی -->
                 <button type="submit" id="submitInvoiceBtn"
                   class="w-full py-3.5 px-4 rounded-xl bg-sky-400 hover:bg-sky-300 active:bg-sky-500 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-sky-400/20 transition-all flex items-center justify-center gap-2">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
                   </svg>
-                  <span>ثبت و ارسال فاکتور به خانم احمدی</span>
+                  <span>ثبت و ارسال به خانم احمدی</span>
                 </button>
               </form>
+
+              <!-- ===================================================== -->
+              <!-- تب ۲: ساخت حواله خروج کالا (سیستمی + اتصال به بانک)  -->
+              <!-- ===================================================== -->
+              <form id="createVoucherForm" onsubmit="handleCreateVoucher(event)" class="hidden space-y-4 animate-fade">
+                
+                <!-- فیلدهای مشخصات سفارش -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label for="vNumber" class="block text-[11px] font-bold text-slate-200 mb-1">
+                      شماره حواله <span class="text-rose-400">*</span>
+                    </label>
+                    <input type="text" id="vNumber" required placeholder="مثال: ۱۴۰۵/۱۰۸"
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-xs text-white focus:border-sky-400 outline-none" />
+                  </div>
+                  <div>
+                    <label for="vCustomerName" class="block text-[11px] font-bold text-slate-200 mb-1">
+                      درخواست‌کننده (نام خریدار) <span class="text-rose-400">*</span>
+                    </label>
+                    <input type="text" id="vCustomerName" required placeholder="نام مشتری یا شرکت"
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-xs text-white focus:border-sky-400 outline-none" />
+                  </div>
+                  <div>
+                    <label for="vPhone" class="block text-[11px] font-bold text-slate-200 mb-1">
+                      شماره تلفن
+                    </label>
+                    <input type="text" id="vPhone" inputmode="tel" placeholder="۰۹۱۲..."
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-xs text-white focus:border-sky-400 outline-none" />
+                  </div>
+                  <div>
+                    <label for="vCustomerCode" class="block text-[11px] font-bold text-slate-200 mb-1">
+                      کد مشتری
+                    </label>
+                    <input type="text" id="vCustomerCode" placeholder="مثال: C-204"
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-xs text-white focus:border-sky-400 outline-none" />
+                  </div>
+                  <div class="sm:col-span-2">
+                    <label for="vShipping" class="block text-[11px] font-bold text-slate-200 mb-1">
+                      نحوه ارسال (باربری، تحویل حضوری و...)
+                    </label>
+                    <input type="text" id="vShipping" placeholder="مثال: باربری وطن / تحویل حضوری درب کارخانه"
+                      class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-xs text-white focus:border-sky-400 outline-none" />
+                  </div>
+                </div>
+
+                <!-- بخش اقلام کالا (پویا + متصل به بانک قطعات) -->
+                <div class="border-t border-slate-700/80 pt-3.5">
+                  <div class="flex items-center justify-between mb-3">
+                    <div>
+                      <h4 class="text-xs font-extrabold text-sky-400">اقلام کالای حواله خروج</h4>
+                      <p class="text-[10px] text-slate-400">با انتخاب کد یا عنوان کالا، مشخصات خودکار از بانک قطعات پر می‌شود</p>
+                    </div>
+                    <button type="button" onclick="addVoucherRow()"
+                      class="px-3 py-2 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/30 text-xs font-extrabold transition-all flex items-center gap-1 shrink-0">
+                      <span>+ افزودن ردیف کالا</span>
+                    </button>
+                  </div>
+
+                  <!-- نگهدارنده سطرهای پویا -->
+                  <div id="voucherRowsContainer" class="space-y-2.5 max-h-[340px] overflow-y-auto pr-0.5">
+                    <div id="emptyRowsHint" class="text-center py-6 px-3 rounded-2xl border border-dashed border-slate-700 bg-slate-900/50 text-[11px] text-slate-400">
+                      هنوز ردیف کالایی اضافه نشده است. روی دکمه <strong class="text-emerald-400">«+ افزودن ردیف کالا»</strong> بزنید.
+                    </div>
+                  </div>
+
+                  <!-- جمع کل تعداد قطعات -->
+                  <div class="mt-3 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-300">جمع کل تعداد قطعات:</span>
+                    <div class="flex items-center gap-1.5">
+                      <span id="voucherTotalQty" class="text-base font-black text-emerald-400">0</span>
+                      <span class="text-[11px] text-slate-400 font-bold">واحد / عدد</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- یادداشت اختیاری حواله -->
+                <div>
+                  <label for="vNote" class="block text-[11px] font-bold text-slate-200 mb-1">
+                    توضیحات تکمیلی حواله (اختیاری)
+                  </label>
+                  <input type="text" id="vNote" placeholder="توضیحات اضافی برای واحد اداری یا خط تولید..."
+                    class="w-full rounded-xl border border-slate-700 bg-slate-900 px-3 py-2.5 text-xs text-white focus:border-sky-400 outline-none" />
+                </div>
+
+                <!-- دکمه نهایی ثبت و ارجاع حواله -->
+                <button type="submit" id="submitVoucherBtn"
+                  class="w-full py-3.5 px-4 rounded-xl bg-sky-400 hover:bg-sky-300 active:bg-sky-500 text-slate-950 font-black text-xs sm:text-sm shadow-lg shadow-sky-400/20 transition-all flex items-center justify-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                  <span>ثبت و ارجاع حواله به خانم احمدی</span>
+                </button>
+              </form>
+
+              <!-- ===================================================== -->
+              <!-- تب ۳: بانک قطعات و تعریف محصول جدید                   -->
+              <!-- ===================================================== -->
+              <div id="productsBankSection" class="hidden space-y-4 animate-fade">
+                <form id="createProductForm" onsubmit="handleSaveProduct(event)" class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-4 space-y-3">
+                  <div class="flex items-center justify-between pb-2 border-b border-slate-800">
+                    <h4 class="text-xs font-extrabold text-sky-400">تعریف قطعه / محصول جدید در بانک</h4>
+                    <span class="text-[10px] text-slate-400">ذخیره آنلاین در سرور</span>
+                  </div>
+
+                  <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    <div class="sm:col-span-1">
+                      <label for="prodCode" class="block text-[11px] font-bold text-slate-300 mb-1">
+                        کد کالا <span class="text-rose-400">*</span>
+                      </label>
+                      <input type="text" id="prodCode" required placeholder="مثال: 112-5B"
+                        class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-sky-400 font-mono font-bold focus:border-sky-400 outline-none" />
+                    </div>
+
+                    <div class="sm:col-span-2">
+                      <label for="prodUnit" class="block text-[11px] font-bold text-slate-300 mb-1">
+                        واحد پیش‌فرض <span class="text-rose-400">*</span>
+                      </label>
+                      <select id="prodUnit"
+                        class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-xs text-white font-bold focus:border-sky-400 outline-none">
+                        <option value="عدد">عدد</option>
+                        <option value="شاخه">شاخه</option>
+                        <option value="دست">دست</option>
+                        <option value="ست">ست</option>
+                      </select>
+                    </div>
+
+                    <div class="sm:col-span-3">
+                      <label for="prodName" class="block text-[11px] font-bold text-slate-300 mb-1">
+                        عنوان کالا <span class="text-rose-400">*</span>
+                      </label>
+                      <input type="text" id="prodName" required placeholder="مثال: کلکتور ۱×۱.۲ پنج لایه 5B"
+                        class="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2.5 text-xs text-white focus:border-sky-400 outline-none" />
+                    </div>
+                  </div>
+
+                  <button type="submit" id="saveProductBtn"
+                    class="w-full py-2.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:bg-emerald-600 text-slate-950 font-black text-xs shadow-lg shadow-emerald-500/20 transition-all flex items-center justify-center gap-1.5">
+                    <span>+ ذخیره در بانک قطعات</span>
+                  </button>
+                </form>
+
+                <!-- جدول نمایش قطعات ذخیره‌شده در بانک -->
+                <div class="bg-slate-900 border border-slate-700/80 rounded-2xl overflow-hidden">
+                  <div class="px-3.5 py-2.5 bg-slate-950/70 border-b border-slate-800 flex items-center justify-between">
+                    <span class="text-xs font-extrabold text-slate-200">لیست قطعات ذخیره‌شده در سرور</span>
+                    <span id="productsTableCountBadge" class="text-[11px] font-bold text-sky-400 bg-sky-400/10 px-2 py-0.5 rounded-lg">0 قطعه</span>
+                  </div>
+                  <div class="max-h-[300px] overflow-y-auto">
+                    <table class="w-full text-right text-xs border-collapse">
+                      <thead>
+                        <tr class="bg-slate-950/90 text-slate-400 border-b border-slate-800 text-[10px]">
+                          <th class="py-2 px-3 font-extrabold">کد کالا</th>
+                          <th class="py-2 px-3 font-extrabold">عنوان کالا</th>
+                          <th class="py-2 px-2 font-extrabold text-center">واحد</th>
+                          <th class="py-2 px-2 font-extrabold text-center w-12">حذف</th>
+                        </tr>
+                      </thead>
+                      <tbody id="productsTableBody" class="divide-y divide-slate-800/70">
+                        <tr>
+                          <td colspan="4" class="py-6 text-center text-slate-500 text-[11px]">در حال بارگذاری بانک قطعات...</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -402,14 +745,14 @@
 
               <!-- نوار جستجو -->
               <div class="relative mb-5">
-                <input type="text" id="searchInput" oninput="renderInvoices()" placeholder="جستجو در شماره فاکتور، نام سفارش یا توضیحات..."
+                <input type="text" id="searchInput" oninput="renderInvoices()" placeholder="جستجو در شماره فاکتور، نام خریدار، کد کالا یا توضیحات..."
                   class="w-full rounded-xl border border-slate-700 bg-slate-900 pr-10 pl-4 py-2.5 text-xs sm:text-sm text-white focus:border-sky-400 outline-none transition-all" />
                 <svg class="w-4 h-4 text-slate-400 absolute right-3.5 top-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
                 </svg>
               </div>
 
-              <!-- نگهدارنده کارت‌های فاکتور -->
+              <!-- نگهدارنده کارت‌های فاکتور و حواله -->
               <div id="invoicesContainer" class="space-y-5">
                 <div class="text-center py-12 text-slate-400 text-xs">در حال دریافت لیست فاکتورها از سرور...</div>
               </div>
@@ -486,7 +829,7 @@
 
   <!-- فوتر -->
   <footer class="text-center py-4 text-[11px] text-slate-400 border-t border-slate-800 bg-slate-900">
-    سامانه مدیریت فاکتور و کنترل تولید <span class="text-sky-400 font-bold">آبان کلکتور</span> | همگام‌سازی ابری ۳ کاربره
+    سامانه مدیریت حواله خروج کالا و رهگیری خط تولید <span class="text-sky-400 font-bold">گروه صنعتی آبان کلکتور</span> | همگام‌سازی ابری ۳ کاربره
   </footer>
 
   <!-- ================================================================= -->
@@ -514,10 +857,15 @@
     let currentRole = null;
     let selectedLoginRole = null;
     let invoicesList = [];
+    let productsBank = []; // آرایه بانک قطعات از شاخه products.json
     let currentFilter = 'all';
     let compressedBase64Image = null;
     let compressedImageMeta = '';
     let pollTimer = null;
+
+    // متغیرهای اختصاصی تب ساخت حواله خروج کالا
+    let activeMajidTab = 'image';
+    let voucherRowsState = [];
 
     // ۱. بررسی نشست ذخیره‌شده در LocalStorage هنگام باز شدن برنامه
     window.addEventListener('DOMContentLoaded', () => {
@@ -584,7 +932,6 @@
         if (!res.ok) throw new Error('Database unreachable');
         const dbPass = await res.json();
 
-        // اگر رمزی ثبت نشده بود، پیش‌فرض 1234 است
         const validPass = (dbPass !== null && dbPass !== undefined) ? toEnglishDigits(String(dbPass)) : "1234";
 
         if (dbPass === null) {
@@ -669,7 +1016,7 @@
         resetBtn.classList.add('inline-flex');
         filterPendingBtn.classList.remove('hidden');
         filterSentBtn.textContent = '🟢 ارجاع به کارخانه';
-        document.getElementById('listTitle').textContent = 'فاکتورهای ثبت‌شده و رهگیری زنده خط تولید';
+        document.getElementById('listTitle').textContent = 'فاکتورها و حواله‌های ثبت‌شده و رهگیری خط تولید';
         document.getElementById('listSubtitle').textContent = 'مشاهده لحظه‌ای وضعیت ارجاع خانم احمدی و ۵ مرحله تولید خانم کاملی';
       } else if (currentRole === 'ahmadi') {
         majidCol.classList.add('hidden');
@@ -678,8 +1025,8 @@
         resetBtn.classList.remove('inline-flex');
         filterPendingBtn.classList.remove('hidden');
         filterSentBtn.textContent = '🟢 ارسال‌شده به کارخانه';
-        document.getElementById('listTitle').textContent = 'فاکتورهای دریافتی جهت ارجاع به کارخانه';
-        document.getElementById('listSubtitle').textContent = 'پس از تایید هر فاکتور، سفارش بلافاصله در پنل خط تولید خانم کاملی فعال می‌شود';
+        document.getElementById('listTitle').textContent = 'فاکتورها و حواله‌های دریافتی جهت ارجاع به کارخانه';
+        document.getElementById('listSubtitle').textContent = 'پس از تایید هر سفارش، بلافاصله در پنل خط تولید خانم کاملی فعال می‌شود';
       } else if (currentRole === 'kamali') {
         majidCol.classList.add('hidden');
         listCol.className = 'lg:col-span-12';
@@ -688,15 +1035,420 @@
         filterPendingBtn.classList.add('hidden');
         filterSentBtn.textContent = '🟢 تکمیل و ارسال نهایی';
         document.getElementById('listTitle').textContent = 'پنل کنترل خط تولید کارخانه (خانم کاملی)';
-        document.getElementById('listSubtitle').textContent = 'فقط فاکتورهای تاییدشده توسط خانم احمدی نمایش داده می‌شوند • تیک هر مرحله را پس از انجام بزنید';
+        document.getElementById('listSubtitle').textContent = 'فقط سفارش‌های تاییدشده توسط خانم احمدی نمایش داده می‌شوند • تیک هر مرحله را پس از انجام بزنید';
       }
 
-      fetchInvoices();
+      syncAllCloudData();
       if (pollTimer) clearInterval(pollTimer);
-      pollTimer = setInterval(fetchInvoices, 2500);
+      pollTimer = setInterval(syncAllCloudData, 2000); // بررسی زنده هر ۲ ثانیه
     }
 
-    // ۶. دریافت مستمر اطلاعات از فایربیس (هر ۲.۵ ثانیه یک‌بار)
+    // ۵-الف. همگام‌سازی همزمان فاکتورها و بانک قطعات در هر ۲ ثانیه
+    async function syncAllCloudData() {
+      await Promise.all([
+        fetchInvoices(),
+        fetchProductsBank()
+      ]);
+    }
+
+    // ۵-ب. جابجایی بین ۳ تب اصلی پنل آقا مجید
+    function switchMajidTab(tabName) {
+      activeMajidTab = tabName;
+      const tabs = ['image', 'voucher', 'products'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`majidTabBtn-${t}`);
+        if (!btn) return;
+        if (t === tabName) {
+          btn.className = 'py-2.5 px-1.5 rounded-xl text-[11px] font-extrabold transition-all bg-sky-400 text-slate-950 shadow truncate';
+        } else {
+          btn.className = 'py-2.5 px-1.5 rounded-xl text-[11px] font-bold transition-all text-slate-300 hover:text-white truncate';
+        }
+      });
+
+      document.getElementById('createInvoiceForm').classList.toggle('hidden', tabName !== 'image');
+      document.getElementById('createVoucherForm').classList.toggle('hidden', tabName !== 'voucher');
+      document.getElementById('productsBankSection').classList.toggle('hidden', tabName !== 'products');
+    }
+
+    // =====================================================================
+    // ۵-پ. بانک قطعات (تب ۳ آقا مجید - ذخیره، حذف و بارگذاری از products.json)
+    // =====================================================================
+    async function fetchProductsBank() {
+      try {
+        const res = await fetch(`${DB_URL}/products.json`, { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+
+        if (data && typeof data === 'object') {
+          productsBank = Object.entries(data).map(([key, val]) => ({
+            ...val,
+            id: val.id || key
+          })).sort((a, b) => String(a.code || '').localeCompare(String(b.code || ''), 'fa'));
+        } else {
+          productsBank = [];
+        }
+
+        updateProductDatalists();
+        renderProductsBankTable();
+      } catch (err) {
+        // در صورت قطع موقت شبکه، اطلاعات قبلی حفظ می‌شود
+      }
+    }
+
+    function updateProductDatalists() {
+      const codeDl = document.getElementById('productsCodeList');
+      const nameDl = document.getElementById('productsNameList');
+      if (codeDl) {
+        codeDl.innerHTML = productsBank.map(p =>
+          `<option value="${escapeHtml(p.code)}">${escapeHtml(p.name)} (${escapeHtml(p.unit || 'عدد')})</option>`
+        ).join('');
+      }
+      if (nameDl) {
+        nameDl.innerHTML = productsBank.map(p =>
+          `<option value="${escapeHtml(p.name)}">کد: ${escapeHtml(p.code)} (${escapeHtml(p.unit || 'عدد')})</option>`
+        ).join('');
+      }
+
+      const countSpan = document.getElementById('productsTabCount');
+      if (countSpan) countSpan.textContent = productsBank.length.toLocaleString('fa-IR');
+      const badgeSpan = document.getElementById('productsTableCountBadge');
+      if (badgeSpan) badgeSpan.textContent = `${productsBank.length.toLocaleString('fa-IR')} قطعه`;
+    }
+
+    function renderProductsBankTable() {
+      const tbody = document.getElementById('productsTableBody');
+      if (!tbody) return;
+
+      if (productsBank.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="4" class="py-7 px-3 text-center text-slate-400 text-[11px]">
+              هنوز قطعه‌ای در بانک قطعات ثبت نشده است. از فرم بالا اولین قطعه را اضافه کنید.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = productsBank.map(prod => `
+        <tr class="hover:bg-slate-950/60 transition-colors">
+          <td class="py-2.5 px-3 font-mono font-bold text-sky-400">${escapeHtml(prod.code)}</td>
+          <td class="py-2.5 px-3 font-bold text-white">${escapeHtml(prod.name)}</td>
+          <td class="py-2.5 px-2 text-center text-emerald-400 font-bold">${escapeHtml(prod.unit || 'عدد')}</td>
+          <td class="py-2.5 px-2 text-center">
+            <button type="button" onclick="deleteProductFromBank('${prod.id}')"
+              class="text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 p-1.5 rounded-lg transition-colors"
+              title="حذف قطعه از بانک">
+              🗑
+            </button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    async function handleSaveProduct(e) {
+      e.preventDefault();
+      const codeInput = document.getElementById('prodCode');
+      const nameInput = document.getElementById('prodName');
+      const unitSelect = document.getElementById('prodUnit');
+      const saveBtn = document.getElementById('saveProductBtn');
+
+      const code = codeInput.value.trim();
+      const name = nameInput.value.trim();
+      const unit = unitSelect.value || 'عدد';
+
+      if (!code || !name) {
+        showToast('لطفاً کد کالا و عنوان کالا را وارد نمایید', 'error');
+        return;
+      }
+
+      saveBtn.disabled = true;
+      saveBtn.innerHTML = '<span>در حال ذخیره در سرور...</span>';
+
+      // اگر کد کالا قبلاً وجود داشت، همان را بروزرسانی کن
+      const existing = productsBank.find(p => p.code.trim().toLowerCase() === code.toLowerCase());
+      const prodId = existing ? existing.id : ('prod_' + Date.now());
+
+      const payload = {
+        id: prodId,
+        code: code,
+        name: name,
+        unit: unit,
+        createdAt: getPersianDateTime()
+      };
+
+      try {
+        const res = await fetch(`${DB_URL}/products/${prodId}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) throw new Error('Save product failed');
+
+        codeInput.value = '';
+        nameInput.value = '';
+        unitSelect.value = 'عدد';
+        showToast(`قطعه «${name}» با کد ${code} در بانک قطعات ذخیره شد`, 'success');
+        await fetchProductsBank();
+      } catch (err) {
+        showToast('خطا در ذخیره قطعه روی سرور فایربیس!', 'error');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.innerHTML = '<span>+ ذخیره در بانک قطعات</span>';
+      }
+    }
+
+    async function deleteProductFromBank(prodId) {
+      if (currentRole !== 'majid') return;
+      const target = productsBank.find(p => p.id === prodId);
+      if (!confirm(`آیا از حذف قطعه «${target ? target.name : ''}» از بانک قطعات اطمینان دارید؟`)) return;
+
+      try {
+        const res = await fetch(`${DB_URL}/products/${prodId}.json`, {
+          method: 'DELETE'
+        });
+        if (!res.ok) throw new Error('Delete product failed');
+        showToast('قطعه از بانک قطعات حذف گردید', 'info');
+        await fetchProductsBank();
+      } catch (err) {
+        showToast('خطا در حذف قطعه از سرور', 'error');
+      }
+    }
+
+    // =====================================================================
+    // ۵-ت. مدیریت پویا ردیف‌های حواله خروج + اتصال دوطرفه هوشمند (Auto-Complete)
+    // =====================================================================
+    function addVoucherRow() {
+      const rowId = 'row_' + Date.now() + '_' + Math.floor(Math.random() * 1000);
+      voucherRowsState.push({
+        id: rowId,
+        code: '',
+        name: '',
+        qty: '',
+        unit: 'عدد',
+        desc: ''
+      });
+      renderVoucherRows();
+    }
+
+    function removeVoucherRow(rowId) {
+      voucherRowsState = voucherRowsState.filter(r => r.id !== rowId);
+      renderVoucherRows();
+    }
+
+    // اتصال دوطرفه هوشمند بین کد کالا، عنوان کالا و واحد اندازه‌گیری از بانک قطعات
+    function updateVoucherRowField(rowId, field, value) {
+      const item = voucherRowsState.find(r => r.id === rowId);
+      if (!item) return;
+      item[field] = value;
+
+      const normalizedVal = value.trim().toLowerCase();
+
+      if (field === 'code' && normalizedVal) {
+        const matchedByCode = productsBank.find(p => (p.code || '').trim().toLowerCase() === normalizedVal);
+        if (matchedByCode) {
+          item.name = matchedByCode.name;
+          item.unit = matchedByCode.unit || 'عدد';
+          const nameInput = document.getElementById(`row-name-${rowId}`);
+          const unitInput = document.getElementById(`row-unit-${rowId}`);
+          if (nameInput) nameInput.value = item.name;
+          if (unitInput) unitInput.value = item.unit;
+        }
+      } else if (field === 'name' && normalizedVal) {
+        const matchedByName = productsBank.find(p => (p.name || '').trim().toLowerCase() === normalizedVal);
+        if (matchedByName) {
+          item.code = matchedByName.code;
+          item.unit = matchedByName.unit || 'عدد';
+          const codeInput = document.getElementById(`row-code-${rowId}`);
+          const unitInput = document.getElementById(`row-unit-${rowId}`);
+          if (codeInput) codeInput.value = item.code;
+          if (unitInput) unitInput.value = item.unit;
+        }
+      }
+
+      if (field === 'qty') {
+        recalculateVoucherTotalQty();
+      }
+    }
+
+    function recalculateVoucherTotalQty() {
+      const total = voucherRowsState.reduce((sum, r) => {
+        const cleanNum = Number(toEnglishDigits(String(r.qty || '0')).replace(/[^0-9.]/g, '')) || 0;
+        return sum + cleanNum;
+      }, 0);
+      const totalEl = document.getElementById('voucherTotalQty');
+      if (totalEl) {
+        totalEl.textContent = total.toLocaleString('fa-IR');
+      }
+      return total;
+    }
+
+    function renderVoucherRows() {
+      const container = document.getElementById('voucherRowsContainer');
+      if (!container) return;
+
+      if (voucherRowsState.length === 0) {
+        container.innerHTML = `
+          <div id="emptyRowsHint" class="text-center py-6 px-3 rounded-2xl border border-dashed border-slate-700 bg-slate-900/50 text-[11px] text-slate-400">
+            هنوز ردیف کالایی اضافه نشده است. روی دکمه <strong class="text-emerald-400">«+ افزودن ردیف کالا»</strong> بزنید.
+          </div>
+        `;
+        recalculateVoucherTotalQty();
+        return;
+      }
+
+      container.innerHTML = voucherRowsState.map((row, idx) => `
+        <div class="p-3 rounded-2xl bg-slate-900 border border-slate-700/90 space-y-2 animate-fade">
+          <div class="flex items-center justify-between">
+            <span class="text-[11px] font-extrabold text-sky-400">ردیف ${(idx + 1).toLocaleString('fa-IR')}</span>
+            <button type="button" onclick="removeVoucherRow('${row.id}')"
+              class="text-[11px] font-bold text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 px-2.5 py-0.5 rounded-lg transition-colors">
+              ✕ حذف سطر
+            </button>
+          </div>
+          <div class="grid grid-cols-12 gap-2">
+            <div class="col-span-4 sm:col-span-3">
+              <input type="text" id="row-code-${row.id}" list="productsCodeList" placeholder="کد کالا" value="${escapeHtml(row.code)}"
+                oninput="updateVoucherRowField('${row.id}', 'code', this.value)"
+                onchange="updateVoucherRowField('${row.id}', 'code', this.value)"
+                class="w-full rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-sky-400 font-mono font-bold focus:border-sky-400 outline-none" />
+            </div>
+            <div class="col-span-8 sm:col-span-5">
+              <input type="text" id="row-name-${row.id}" list="productsNameList" required placeholder="عنوان کالا *" value="${escapeHtml(row.name)}"
+                oninput="updateVoucherRowField('${row.id}', 'name', this.value)"
+                onchange="updateVoucherRowField('${row.id}', 'name', this.value)"
+                class="w-full rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-white focus:border-sky-400 outline-none" />
+            </div>
+            <div class="col-span-6 sm:col-span-2">
+              <input type="text" id="row-qty-${row.id}" required inputmode="numeric" placeholder="تعداد *" value="${escapeHtml(row.qty)}"
+                oninput="updateVoucherRowField('${row.id}', 'qty', this.value)"
+                class="w-full rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-emerald-400 font-extrabold text-center focus:border-sky-400 outline-none" />
+            </div>
+            <div class="col-span-6 sm:col-span-2">
+              <input type="text" id="row-unit-${row.id}" placeholder="واحد" value="${escapeHtml(row.unit)}"
+                oninput="updateVoucherRowField('${row.id}', 'unit', this.value)"
+                class="w-full rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-2 text-xs text-slate-200 text-center focus:border-sky-400 outline-none" />
+            </div>
+            <div class="col-span-12">
+              <input type="text" id="row-desc-${row.id}" placeholder="شرح ردیف (اختیاری)" value="${escapeHtml(row.desc)}"
+                oninput="updateVoucherRowField('${row.id}', 'desc', this.value)"
+                class="w-full rounded-lg border border-slate-700 bg-slate-950 px-2.5 py-1.5 text-xs text-slate-300 focus:border-sky-400 outline-none" />
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      recalculateVoucherTotalQty();
+    }
+
+    function resetVoucherFormUI() {
+      document.getElementById('vNumber').value = '';
+      document.getElementById('vCustomerName').value = '';
+      document.getElementById('vPhone').value = '';
+      document.getElementById('vCustomerCode').value = '';
+      document.getElementById('vShipping').value = '';
+      document.getElementById('vNote').value = '';
+      voucherRowsState = [];
+      renderVoucherRows();
+    }
+
+    // ۵-ث. ثبت و ارسال حواله خروج کالای سیستمی توسط آقا مجید در دیتابیس
+    async function handleCreateVoucher(e) {
+      e.preventDefault();
+      const vNumber = document.getElementById('vNumber').value.trim();
+      const vCustomerName = document.getElementById('vCustomerName').value.trim();
+      const vPhone = document.getElementById('vPhone').value.trim();
+      const vCustomerCode = document.getElementById('vCustomerCode').value.trim();
+      const vShipping = document.getElementById('vShipping').value.trim();
+      const vNote = document.getElementById('vNote').value.trim();
+
+      if (!vNumber || !vCustomerName) {
+        showToast('لطفاً شماره حواله و نام درخواست‌کننده را وارد کنید', 'error');
+        return;
+      }
+
+      if (voucherRowsState.length === 0) {
+        showToast('لطفاً با زدن «+ افزودن ردیف کالا» حداقل یک ردیف کالا وارد کنید', 'error');
+        return;
+      }
+
+      const cleanedItems = voucherRowsState.map((r, idx) => {
+        const numericQty = Number(toEnglishDigits(String(r.qty || '0')).replace(/[^0-9.]/g, '')) || 0;
+        return {
+          rowNumber: idx + 1,
+          code: (r.code || '-').trim(),
+          name: (r.name || '').trim(),
+          qty: numericQty,
+          unit: (r.unit || 'عدد').trim() || 'عدد',
+          desc: (r.desc || '').trim()
+        };
+      });
+
+      if (cleanedItems.some(item => !item.name || item.qty <= 0)) {
+        showToast('لطفاً عنوان کالا و تعداد معتبر برای تمام ردیف‌ها وارد کنید', 'error');
+        return;
+      }
+
+      const totalQty = cleanedItems.reduce((sum, item) => sum + item.qty, 0);
+
+      const btn = document.getElementById('submitVoucherBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<span>در حال ثبت و ارسال حواله به خانم احمدی...</span>';
+
+      const invId = 'inv_' + Date.now();
+      const voucherPayload = {
+        id: invId,
+        type: 'voucher',
+        title: `حواله خروج کالا شماره ${vNumber} - ${vCustomerName}`,
+        voucherNumber: vNumber,
+        requesterName: vCustomerName,
+        phone: vPhone,
+        customerCode: vCustomerCode,
+        shippingMethod: vShipping,
+        items: cleanedItems,
+        totalQty: totalQty,
+        majidNote: vNote,
+        image: null,
+        sent: false,
+        sentToFactory: false,
+        createdAt: getPersianDateTime(),
+        createdAtTimestamp: Date.now(),
+        sentAt: null,
+        ahmadiNote: '',
+        step_cnc: false,
+        step_drill: false,
+        step_plating: false,
+        step_pack: false,
+        step_sent: false
+      };
+
+      try {
+        const res = await fetch(`${DB_URL}/invoices/${invId}.json`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(voucherPayload)
+        });
+
+        if (!res.ok) throw new Error('Voucher upload failed');
+
+        resetVoucherFormUI();
+        showToast('حواله خروج کالا ثبت شد و به پنل خانم احمدی ارسال گردید', 'success');
+        fetchInvoices();
+      } catch (err) {
+        showToast('خطا در ذخیره حواله روی سرور فایربیس!', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = `
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+          <span>ثبت و ارجاع حواله به خانم احمدی</span>
+        `;
+      }
+    }
+
+    // ۶. دریافت مستمر اطلاعات فاکتورها از فایربیس
     async function fetchInvoices() {
       try {
         const res = await fetch(`${DB_URL}/invoices.json`, { cache: 'no-store' });
@@ -705,11 +1457,12 @@
 
         if (data && typeof data === 'object') {
           invoicesList = Object.entries(data).map(([key, val]) => {
-            // پشتیبانی همزمان از کلید جدید sentToFactory و کلید قدیمی sent
             const isSentToFactory = Boolean(val.sentToFactory || val.sent);
             return {
               ...val,
               id: val.id || key,
+              type: val.type || 'image',
+              items: Array.isArray(val.items) ? val.items : (val.items ? Object.values(val.items) : []),
               sentToFactory: isSentToFactory,
               step_cnc: Boolean(val.step_cnc),
               step_drill: Boolean(val.step_drill),
@@ -810,7 +1563,7 @@
       previewBox.classList.remove('flex');
     }
 
-    // ۸. ثبت و ارسال فاکتور جدید توسط آقا مجید
+    // ۸. ثبت و ارسال فاکتور تصویری توسط آقا مجید
     async function handleCreateInvoice(e) {
       e.preventDefault();
       const title = document.getElementById('invTitle').value.trim();
@@ -832,6 +1585,7 @@
       const invId = 'inv_' + Date.now();
       const newInvoicePayload = {
         id: invId,
+        type: 'image',
         title: title,
         majidNote: majidNote,
         image: compressedBase64Image,
@@ -869,7 +1623,7 @@
           <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/>
           </svg>
-          <span>ثبت و ارسال فاکتور به خانم احمدی</span>
+          <span>ثبت و ارسال به خانم احمدی</span>
         `;
       }
     }
@@ -900,7 +1654,7 @@
         });
 
         if (!res.ok) throw new Error('Confirm failed');
-        showToast('فاکتور به کارخانه ارجاع شد و در پنل خانم کاملی قرار گرفت', 'success');
+        showToast('سفارش به کارخانه ارجاع شد و در پنل خانم کاملی قرار گرفت', 'success');
         fetchInvoices();
       } catch (err) {
         showToast('خطا در ثبت تأییدیه! اتصال اینترنت را بررسی کنید.', 'error');
@@ -941,24 +1695,24 @@
       }
     }
 
-    // ۱۱. حذف فاکتور (مخصوص آقا مجید)
+    // ۱۱. حذف فاکتور یا حواله (مخصوص آقا مجید)
     async function deleteInvoice(invoiceId) {
       if (currentRole !== 'majid') return;
-      if (!confirm('آیا از حذف دائمی این فاکتور اطمینان دارید؟')) return;
+      if (!confirm('آیا از حذف دائمی این مورد اطمینان دارید؟')) return;
 
       try {
         const res = await fetch(`${DB_URL}/invoices/${invoiceId}.json`, {
           method: 'DELETE'
         });
         if (!res.ok) throw new Error('Delete failed');
-        showToast('فاکتور مورد نظر حذف گردید', 'info');
+        showToast('سفارش مورد نظر حذف گردید', 'info');
         fetchInvoices();
       } catch (err) {
-        showToast('خطا در حذف فاکتور از سرور', 'error');
+        showToast('خطا در حذف از سرور', 'error');
       }
     }
 
-    // ۱۲. محاسبه وضعیت و درصد پیشرفت تولید هر فاکتور
+    // ۱۲. محاسبه وضعیت و درصد پیشرفت تولید هر سفارش
     function getProductionProgressInfo(inv) {
       const completedSteps = PRODUCTION_STEPS.filter(s => Boolean(inv[s.key]));
       const count = completedSteps.length;
@@ -981,7 +1735,147 @@
       return { count, percent, currentStageText, isFinished: Boolean(inv.step_sent) };
     }
 
-    // ۱۳. فیلتر، جستجو و رندر لیست فاکتورها
+    // =====================================================================
+    // ۱۲-ب. منطق چاپ و خروجی PDF در دو قطع A4 و A5 (در دسترس برای هر ۳ نقش)
+    // =====================================================================
+    function cleanupPrintClasses() {
+      document.body.classList.remove('print-a4', 'print-a5');
+      const dynStyle = document.getElementById('dynamicPrintPageStyle');
+      if (dynStyle) dynStyle.textContent = '';
+    }
+
+    window.onafterprint = cleanupPrintClasses;
+
+    function printVoucher(invoiceId, paperSize) {
+      const inv = invoicesList.find(i => i.id === invoiceId);
+      if (!inv) return;
+
+      const items = Array.isArray(inv.items) ? inv.items : [];
+      const totalQty = inv.totalQty || items.reduce((s, i) => s + (Number(i.qty) || 0), 0);
+
+      const printSheet = document.getElementById('printVoucherSheet');
+      printSheet.innerHTML = `
+        <div class="pv-container">
+          <!-- سربرگ رسمی با نام گروه صنعتی آبان کلکتور و محل قرارگیری لوگو -->
+          <div class="pv-header">
+            <div class="pv-brand">
+              <div class="pv-logo-box">
+                <svg viewBox="0 0 200 200" style="width:100%;height:100%;" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M100 18 L42 120 H57 L100 44 L143 120 H158 L100 18 Z" fill="#18627c"/>
+                  <path d="M100 52 L64 120 H78 L100 78 L122 120 H136 L100 52 Z" fill="#18627c"/>
+                  <path d="M100 84 L84 120 H116 L100 84 Z" fill="#18627c"/>
+                  <path d="M44 128 C44 159 69 184 100 184 C131 184 156 159 156 128 H143 C143 152 124 171 100 171 C76 171 57 152 57 128 H44 Z" fill="#18627c"/>
+                  <path d="M64 128 C64 148 80 164 100 164 C120 164 136 148 136 128 H123 C123 141 113 151 100 151 C87 151 77 141 77 128 H64 Z" fill="#18627c"/>
+                  <path d="M84 128 C84 137 91 144 100 144 C109 144 116 137 116 128 H84 Z" fill="#18627c"/>
+                </svg>
+              </div>
+              <div>
+                <div class="pv-title">گروه صنعتی آبان کلکتور</div>
+                <div class="pv-subtitle">برگه رسمی حواله خروج کالا و سفارش تولید کارخانه</div>
+              </div>
+            </div>
+            <div class="pv-meta-box">
+              <div><strong>شماره حواله:</strong> ${escapeHtml(inv.voucherNumber || '-')}</div>
+              <div><strong>تاریخ و ساعت ثبت:</strong> ${escapeHtml(inv.createdAt || '-')}</div>
+            </div>
+          </div>
+
+          <!-- مشخصات کامل حواله -->
+          <div class="pv-info-grid">
+            <div class="pv-info-cell">
+              <div style="color:#475569;font-size:0.9em;">درخواست‌کننده (خریدار):</div>
+              <div style="font-weight:900;margin-top:2px;">${escapeHtml(inv.requesterName || '-')}</div>
+            </div>
+            <div class="pv-info-cell">
+              <div style="color:#475569;font-size:0.9em;">کد مشتری:</div>
+              <div style="font-weight:800;margin-top:2px;">${escapeHtml(inv.customerCode || '-')}</div>
+            </div>
+            <div class="pv-info-cell">
+              <div style="color:#475569;font-size:0.9em;">شماره تلفن:</div>
+              <div style="font-weight:800;margin-top:2px;">${escapeHtml(inv.phone || '-')}</div>
+            </div>
+            <div class="pv-info-cell">
+              <div style="color:#475569;font-size:0.9em;">نحوه ارسال:</div>
+              <div style="font-weight:800;margin-top:2px;">${escapeHtml(inv.shippingMethod || '-')}</div>
+            </div>
+          </div>
+
+          <!-- جدول رسمی اقلام کالا به همراه سطر جمع کل تعداد -->
+          <table class="pv-table">
+            <thead>
+              <tr>
+                <th style="width:45px;text-align:center;">ردیف</th>
+                <th style="width:110px;">کد کالا</th>
+                <th>عنوان کالا</th>
+                <th style="width:75px;text-align:center;">تعداد</th>
+                <th style="width:65px;text-align:center;">واحد</th>
+                <th>شرح</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${items.map((item, idx) => `
+                <tr>
+                  <td style="text-align:center;font-weight:700;">${(idx + 1).toLocaleString('fa-IR')}</td>
+                  <td style="font-family:monospace;font-weight:800;">${escapeHtml(item.code || '-')}</td>
+                  <td style="font-weight:800;">${escapeHtml(item.name || '-')}</td>
+                  <td style="text-align:center;font-weight:900;">${Number(item.qty || 0).toLocaleString('fa-IR')}</td>
+                  <td style="text-align:center;font-weight:600;">${escapeHtml(item.unit || 'عدد')}</td>
+                  <td>${escapeHtml(item.desc || '-')}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" style="text-align:left;padding-left:14px;">جمع کل تعداد قطعات:</td>
+                <td style="text-align:center;font-size:1.1em;">${Number(totalQty).toLocaleString('fa-IR')}</td>
+                <td colspan="2">قطعه / واحد</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          ${(inv.majidNote || inv.ahmadiNote) ? `
+            <div class="pv-note-row">
+              ${inv.majidNote ? `<div><strong>توضیحات سفارش:</strong> ${escapeHtml(inv.majidNote)}</div>` : ''}
+              ${inv.ahmadiNote ? `<div style="margin-top:2px;"><strong>یادداشت ارجاع اداری:</strong> ${escapeHtml(inv.ahmadiNote)}</div>` : ''}
+            </div>
+          ` : ''}
+
+          <!-- خط‌چین امضای تحویل‌دهنده و تحویل‌گیرنده در انتهای برگه -->
+          <div class="pv-signatures">
+            <div class="pv-sig-box">
+              <div style="font-weight:800;">مهر و امضای تحویل‌دهنده (انبار / کارخانه):</div>
+              <div style="color:#64748b;font-size:0.85em;border-top:1px dotted #94a3b8;padding-top:4px;margin-top:24px;">
+                تاریخ و ساعت تحویل: .................................
+              </div>
+            </div>
+            <div class="pv-sig-box">
+              <div style="font-weight:800;">نام و امضای تحویل‌گیرنده (مشتری / باربری):</div>
+              <div style="color:#64748b;font-size:0.85em;border-top:1px dotted #94a3b8;padding-top:4px;margin-top:24px;">
+                تأیید صحت تعداد اقلام تحویلی: .........................
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+
+      // تنظیم کلاس سایز کاغذ و قوانین @page
+      document.body.classList.remove('print-a4', 'print-a5');
+      const dynStyle = document.getElementById('dynamicPrintPageStyle');
+
+      if (paperSize === 'A5') {
+        document.body.classList.add('print-a5');
+        dynStyle.textContent = '@media print { @page { size: A5 portrait; margin: 5mm; } }';
+      } else {
+        document.body.classList.add('print-a4');
+        dynStyle.textContent = '@media print { @page { size: A4 portrait; margin: 8mm; } }';
+      }
+
+      setTimeout(() => {
+        window.print();
+      }, 60);
+    }
+
+    // ۱۳. فیلتر، جستجو و رندر لیست فاکتورها و حواله‌های خروج کالا
     function setFilter(filter) {
       currentFilter = filter;
       ['all', 'pending', 'sent'].forEach(f => {
@@ -992,6 +1886,123 @@
           : 'px-3 py-1.5 rounded-lg font-medium text-slate-400 hover:text-white transition-all';
       });
       renderInvoices();
+    }
+
+    // ساخت خروجی رسمی کارت «گروه صنعتی آبان کلکتور - حواله خروج کالا» (بدون کد QR + جدول اقلام + جمع کل + امضاء سیستمی)
+    function buildOfficialVoucherCardInnerHTML(inv, prog) {
+      const items = Array.isArray(inv.items) ? inv.items : [];
+      const totalQty = inv.totalQty || items.reduce((s, i) => s + (Number(i.qty) || 0), 0);
+
+      return `
+        <div class="mt-3 rounded-2xl border border-slate-700 bg-slate-950/90 overflow-hidden shadow-inner">
+          
+          <!-- سربرگ رسمی گروه صنعتی آبان کلکتور - حواله خروج کالا (بدون QR) -->
+          <div class="bg-gradient-to-l from-slate-900 via-slate-900 to-sky-950/60 px-4 py-3.5 border-b border-slate-800 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-xl bg-black border border-sky-400/30 p-1.5 flex items-center justify-center shrink-0">
+                <svg viewBox="0 0 200 200" class="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M100 18 L42 120 H57 L100 44 L143 120 H158 L100 18 Z" fill="#18627c"/>
+                  <path d="M100 52 L64 120 H78 L100 78 L122 120 H136 L100 52 Z" fill="#18627c"/>
+                  <path d="M100 84 L84 120 H116 L100 84 Z" fill="#18627c"/>
+                  <path d="M44 128 C44 159 69 184 100 184 C131 184 156 159 156 128 H143 C143 152 124 171 100 171 C76 171 57 152 57 128 H44 Z" fill="#18627c"/>
+                  <path d="M64 128 C64 148 80 164 100 164 C120 164 136 148 136 128 H123 C123 141 113 151 100 151 C87 151 77 141 77 128 H64 Z" fill="#18627c"/>
+                  <path d="M84 128 C84 137 91 144 100 144 C109 144 116 137 116 128 H84 Z" fill="#18627c"/>
+                </svg>
+              </div>
+              <div>
+                <h5 class="text-xs sm:text-sm font-black text-white">گروه صنعتی آبان کلکتور - حواله خروج کالا</h5>
+                <p class="text-[10px] text-sky-400 font-bold">فرم رسمی سفارش و تولید کارخانه</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 text-xs">
+              <div class="bg-slate-900 border border-slate-700 px-3 py-1 rounded-xl">
+                <span class="text-slate-400 text-[10px]">شماره حواله:</span>
+                <span class="font-black text-sky-400 mr-1">${escapeHtml(inv.voucherNumber || '-')}</span>
+              </div>
+              <div class="bg-slate-900 border border-slate-700 px-3 py-1 rounded-xl hidden sm:block">
+                <span class="text-slate-400 text-[10px]">تاریخ ثبت:</span>
+                <span class="font-bold text-slate-200 mr-1">${escapeHtml(inv.createdAt || '-')}</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- مشخصات کامل خریدار و ارسال -->
+          <div class="p-3.5 grid grid-cols-2 sm:grid-cols-4 gap-2.5 bg-slate-900/50 border-b border-slate-800 text-xs">
+            <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-2.5">
+              <div class="text-[10px] text-slate-400">درخواست‌کننده (خریدار):</div>
+              <div class="font-extrabold text-white mt-0.5 break-words">${escapeHtml(inv.requesterName || '-')}</div>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-2.5">
+              <div class="text-[10px] text-slate-400">شماره تلفن:</div>
+              <div class="font-bold text-slate-200 mt-0.5 dir-ltr text-right">${escapeHtml(inv.phone || '-')}</div>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-2.5">
+              <div class="text-[10px] text-slate-400">کد مشتری:</div>
+              <div class="font-bold text-sky-400 mt-0.5">${escapeHtml(inv.customerCode || '-')}</div>
+            </div>
+            <div class="bg-slate-900/90 border border-slate-800/90 rounded-xl p-2.5">
+              <div class="text-[10px] text-slate-400">نحوه ارسال:</div>
+              <div class="font-bold text-emerald-400 mt-0.5 break-words">${escapeHtml(inv.shippingMethod || '-')}</div>
+            </div>
+          </div>
+
+          <!-- جدول اقلام حواله خروج کالا -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-right text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-900 text-slate-300 border-b border-slate-800 text-[11px]">
+                  <th class="py-2.5 px-3 font-extrabold w-12 text-center">ردیف</th>
+                  <th class="py-2.5 px-3 font-extrabold">کد کالا</th>
+                  <th class="py-2.5 px-3 font-extrabold">عنوان کالا</th>
+                  <th class="py-2.5 px-3 font-extrabold text-center">تعداد</th>
+                  <th class="py-2.5 px-3 font-extrabold text-center">واحد</th>
+                  <th class="py-2.5 px-3 font-extrabold">شرح</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800/70">
+                ${items.map((item, idx) => `
+                  <tr class="hover:bg-slate-900/40 transition-colors">
+                    <td class="py-2.5 px-3 text-center font-bold text-slate-400">${(idx + 1).toLocaleString('fa-IR')}</td>
+                    <td class="py-2.5 px-3 font-mono text-sky-400 font-bold">${escapeHtml(item.code || '-')}</td>
+                    <td class="py-2.5 px-3 font-extrabold text-white">${escapeHtml(item.name || '-')}</td>
+                    <td class="py-2.5 px-3 text-center font-black text-emerald-400 text-sm">${Number(item.qty || 0).toLocaleString('fa-IR')}</td>
+                    <td class="py-2.5 px-3 text-center text-slate-300 font-medium">${escapeHtml(item.unit || 'عدد')}</td>
+                    <td class="py-2.5 px-3 text-slate-400">${escapeHtml(item.desc || '-')}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+              <tfoot>
+                <tr class="bg-slate-900/95 border-t-2 border-slate-700 font-black">
+                  <td colspan="3" class="py-3 px-4 text-left text-slate-200 text-xs">جمع کل تعداد قطعات:</td>
+                  <td class="py-3 px-3 text-center text-emerald-400 text-base">${Number(totalQty).toLocaleString('fa-IR')}</td>
+                  <td colspan="2" class="py-3 px-3 text-slate-400 text-[11px]">قطعه / واحد</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <!-- بخش امضاء سیستمی دفتر و کارخانه -->
+          <div class="p-3 bg-slate-900/80 border-t border-slate-800 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-[11px]">
+            <div class="rounded-xl bg-slate-950/70 border border-slate-800 px-3 py-2 flex items-center justify-between">
+              <span class="text-slate-400 font-medium">ثبت مدیریت (آقا مجید):</span>
+              <span class="text-sky-400 font-bold">${escapeHtml(inv.createdAt || '-')}</span>
+            </div>
+            <div class="rounded-xl bg-slate-950/70 border ${inv.sentToFactory ? 'border-emerald-500/30' : 'border-slate-800'} px-3 py-2 flex items-center justify-between">
+              <span class="text-slate-400 font-medium">امضاء و ارجاع خانم احمدی:</span>
+              <span class="${inv.sentToFactory ? 'text-emerald-400 font-extrabold' : 'text-amber-400 font-bold'}">
+                ${inv.sentToFactory ? `✅ ${escapeHtml(inv.sentAt || 'تایید شده')}` : '⏳ در انتظار تایید'}
+              </span>
+            </div>
+            <div class="rounded-xl bg-slate-950/70 border ${prog.isFinished ? 'border-emerald-500/40' : 'border-slate-800'} px-3 py-2 flex items-center justify-between">
+              <span class="text-slate-400 font-medium">تکمیل تولید خانم کاملی:</span>
+              <span class="${prog.isFinished ? 'text-emerald-400 font-extrabold' : 'text-sky-400 font-bold'}">
+                ${prog.isFinished ? `✅ تکمیل (${escapeHtml(inv.step_sent_at || 'ارسال نهایی')})` : `⚙️ ${prog.count} از ۵ مرحله`}
+              </span>
+            </div>
+          </div>
+
+        </div>
+      `;
     }
 
     function renderInvoices() {
@@ -1026,7 +2037,10 @@
           if (currentFilter === 'sent' && !inv.sentToFactory) return false;
         }
         if (searchVal) {
-          const hay = `${inv.title || ''} ${inv.majidNote || ''} ${inv.ahmadiNote || ''}`.toLowerCase();
+          const itemsText = Array.isArray(inv.items)
+            ? inv.items.map(i => `${i.code || ''} ${i.name || ''} ${i.desc || ''}`).join(' ')
+            : '';
+          const hay = `${inv.title || ''} ${inv.voucherNumber || ''} ${inv.requesterName || ''} ${inv.customerCode || ''} ${inv.majidNote || ''} ${inv.ahmadiNote || ''} ${itemsText}`.toLowerCase();
           return hay.includes(searchVal);
         }
         return true;
@@ -1037,11 +2051,11 @@
       if (filtered.length === 0) {
         container.innerHTML = `
           <div class="text-center py-12 px-4 bg-slate-900/60 border border-dashed border-slate-700 rounded-2xl">
-            <p class="text-sm text-slate-300 font-bold">هیچ فاکتوری در این بخش یافت نشد</p>
+            <p class="text-sm text-slate-300 font-bold">هیچ فاکتور یا حواله‌ای در این بخش یافت نشد</p>
             <p class="text-xs text-slate-500 mt-1">
               ${currentRole === 'kamali'
-                ? 'به محض اینکه خانم احمدی فاکتوری را به کارخانه ارجاع دهد، فوراً در اینجا نمایش داده می‌شود.'
-                : 'هر فاکتور جدید به صورت خودکار و بدون نیاز به رفرش در این لیست ظاهر می‌شود.'}
+                ? 'به محض اینکه خانم احمدی فاکتور یا حواله‌ای را به کارخانه ارجاع دهد، فوراً در اینجا نمایش داده می‌شود.'
+                : 'هر فاکتور یا حواله جدید به صورت خودکار و بدون نیاز به رفرش در این لیست ظاهر می‌شود.'}
             </p>
           </div>
         `;
@@ -1050,6 +2064,7 @@
 
       container.innerHTML = filtered.map(inv => {
         const isSentToFactory = Boolean(inv.sentToFactory);
+        const isVoucher = inv.type === 'voucher';
         const prog = getProductionProgressInfo(inv);
 
         // برچسب وضعیت ارجاع اداری
@@ -1146,6 +2161,76 @@
           </div>
         ` : '';
 
+        // هدر کارت بر اساس اینکه حواله سیستمی است یا فاکتور تصویری
+        // (دارای دو دکمه چاپ A4 و چاپ A5 برای هر ۳ نقش کاربری بدون محدودیت نقش)
+        const cardHeaderSection = isVoucher ? `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 rounded-2xl bg-sky-400/10 border border-sky-400/30 text-sky-400 flex items-center justify-center shrink-0 font-black text-lg">
+                📑
+              </div>
+              <div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-[10px] font-black px-2 py-0.5 rounded-md bg-sky-400/15 text-sky-300 border border-sky-400/30">حواله خروج کالا (سیستمی)</span>
+                  <h4 class="font-extrabold text-white text-sm sm:text-base">${escapeHtml(inv.title)}</h4>
+                </div>
+                <p class="text-[11px] text-slate-400 mt-1">ساعت ثبت حواله: <span class="text-slate-200 font-semibold">${inv.createdAt || '-'}</span></p>
+              </div>
+            </div>
+            <div class="flex flex-wrap items-center gap-2 self-start sm:self-center">
+              ${adminBadge}
+              <button type="button" onclick="printVoucher('${inv.id}', 'A4')"
+                class="text-[11px] font-extrabold text-sky-300 hover:text-white bg-sky-500/15 hover:bg-sky-500/30 border border-sky-400/30 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1">
+                <span>🖨️ چاپ A4</span>
+              </button>
+              <button type="button" onclick="printVoucher('${inv.id}', 'A5')"
+                class="text-[11px] font-extrabold text-emerald-300 hover:text-white bg-emerald-500/15 hover:bg-emerald-500/30 border border-emerald-400/30 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1">
+                <span>🖨️ چاپ A5</span>
+              </button>
+              ${currentRole === 'majid' ? `
+                <button type="button" onclick="deleteInvoice('${inv.id}')"
+                  class="text-[11px] font-bold text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 px-2.5 py-1 rounded-lg transition-colors">
+                  🗑 حذف
+                </button>
+              ` : ''}
+            </div>
+          </div>
+          ${buildOfficialVoucherCardInnerHTML(inv, prog)}
+        ` : `
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3.5 pb-3.5 border-b border-slate-800">
+            <div class="flex items-start gap-3.5">
+              <div onclick="openLightbox('${inv.id}')"
+                class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-950 border border-slate-700 overflow-hidden cursor-pointer shrink-0 relative group shadow">
+                <img src="${inv.image}" alt="${escapeHtml(inv.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                <div class="absolute inset-x-0 bottom-0 bg-black/70 text-[10px] text-center py-0.5 text-sky-300 font-bold">بزرگنمایی</div>
+              </div>
+              <div>
+                <h4 class="font-extrabold text-white text-sm sm:text-base leading-snug">${escapeHtml(inv.title)}</h4>
+                <p class="text-[11px] text-slate-400 mt-1">ساعت ثبت فاکتور: <span class="text-slate-200 font-semibold">${inv.createdAt || '-'}</span></p>
+                
+                <div class="flex flex-wrap items-center gap-2 mt-2.5">
+                  <button type="button" onclick="openLightbox('${inv.id}')"
+                    class="text-[11px] font-bold text-sky-400 bg-sky-400/10 hover:bg-sky-400/20 border border-sky-400/20 px-2.5 py-1 rounded-lg transition-colors">
+                    🔍 مشاهده واضح فاکتور
+                  </button>
+                  <a href="${inv.image}" download="${escapeHtml(inv.title)}.jpg"
+                    class="text-[11px] font-bold text-slate-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded-lg transition-colors">
+                    ⬇️ دانلود عکس
+                  </a>
+                  ${currentRole === 'majid' ? `
+                    <button type="button" onclick="deleteInvoice('${inv.id}')"
+                      class="text-[11px] font-bold text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 px-2.5 py-1 rounded-lg transition-colors">
+                      🗑 حذف
+                    </button>
+                  ` : ''}
+                </div>
+              </div>
+            </div>
+
+            <div class="self-start">${adminBadge}</div>
+          </div>
+        `;
+
         return `
           <div class="rounded-2xl border ${
             prog.isFinished
@@ -1155,39 +2240,7 @@
               : 'border-slate-700/80 bg-slate-900/75'
           } p-4 sm:p-5 transition-all shadow-md">
             
-            <!-- ردیف بالا: تصویر فاکتور، عنوان، ساعت ثبت و وضعیت ارجاع -->
-            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3.5 pb-3.5 border-b border-slate-800">
-              <div class="flex items-start gap-3.5">
-                <div onclick="openLightbox('${inv.id}')"
-                  class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-slate-950 border border-slate-700 overflow-hidden cursor-pointer shrink-0 relative group shadow">
-                  <img src="${inv.image}" alt="${escapeHtml(inv.title)}" class="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                  <div class="absolute inset-x-0 bottom-0 bg-black/70 text-[10px] text-center py-0.5 text-sky-300 font-bold">بزرگنمایی</div>
-                </div>
-                <div>
-                  <h4 class="font-extrabold text-white text-sm sm:text-base leading-snug">${escapeHtml(inv.title)}</h4>
-                  <p class="text-[11px] text-slate-400 mt-1">ساعت ثبت فاکتور: <span class="text-slate-200 font-semibold">${inv.createdAt || '-'}</span></p>
-                  
-                  <div class="flex flex-wrap items-center gap-2 mt-2.5">
-                    <button type="button" onclick="openLightbox('${inv.id}')"
-                      class="text-[11px] font-bold text-sky-400 bg-sky-400/10 hover:bg-sky-400/20 border border-sky-400/20 px-2.5 py-1 rounded-lg transition-colors">
-                      🔍 مشاهده واضح فاکتور
-                    </button>
-                    <a href="${inv.image}" download="${escapeHtml(inv.title)}.jpg"
-                      class="text-[11px] font-bold text-slate-300 bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded-lg transition-colors">
-                      ⬇️ دانلود عکس
-                    </a>
-                    ${currentRole === 'majid' ? `
-                      <button type="button" onclick="deleteInvoice('${inv.id}')"
-                        class="text-[11px] font-bold text-rose-400 hover:text-rose-300 bg-rose-500/10 hover:bg-rose-500/20 px-2.5 py-1 rounded-lg transition-colors">
-                        🗑 حذف
-                      </button>
-                    ` : ''}
-                  </div>
-                </div>
-              </div>
-
-              <div class="self-start">${adminBadge}</div>
-            </div>
+            ${cardHeaderSection}
 
             <!-- نمایش توضیحات مجید در صورت وجود -->
             ${inv.majidNote ? `
@@ -1313,7 +2366,7 @@
     // ۱۵. بزرگنمایی تصویر فاکتور (Lightbox)
     function openLightbox(invId) {
       const inv = invoicesList.find(i => i.id === invId);
-      if (!inv) return;
+      if (!inv || !inv.image) return;
 
       document.getElementById('lightboxImg').src = inv.image;
       document.getElementById('lightboxTitle').textContent = inv.title;
